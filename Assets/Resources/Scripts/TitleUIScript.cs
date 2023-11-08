@@ -11,22 +11,31 @@ using UnityEngine.UI;
 
 public class TitleUIScript : MonoBehaviour
 {
-    GameManager gameManager;
+    private GameManager gameManager;
+    public Animator animator;
+    private EventSystem eventSystem;
 
     [SerializeField] private Button StartButton;
     [SerializeField] private Button CreditButton;
     [SerializeField] private Button QuitButton;
     [SerializeField] private Button SettingButton;
 
+    [SerializeField] private GameObject SettingPanel;
+    
+    [SerializeField] private Button TutorialButton;
+
     void Start()
     {
         gameManager = GameManager.instance;
+        animator = gameObject.GetComponent<Animator>();
+        eventSystem = EventSystem.current;
+        SettingPanel.gameObject.SetActive(false);
     }
 
     void Update()
     {
-        //現在フォーカスされている（選択されている）ゲームオブジェクト取得
-        //取得したゲームオブジェクトがボタンコンポーネント所持しているか確認
+        //現在フォーカス（選択されている）ゲームオブジェクト取得
+        //取得したゲームオブジェクトがボタンコンポーネントを所持しているか確認
         Button selectedButton = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
 
         if (Gamepad.current.buttonEast.wasPressedThisFrame)
@@ -38,16 +47,19 @@ public class TitleUIScript : MonoBehaviour
         }
     }
 
-
-    /////////////////////////////////////////////////
-    //                                             //
-    // 　　　　　以下各種Onclickメソッド設定　　 　　　//
-    //                                             //
-    /////////////////////////////////////////////////
     
+    //////////////////////////////////////////////////
+    //                                              //
+    // 　　　　　以下各種Onclickメソッド設定　　 　　  //
+    //                                           　 //
+    //////////////////////////////////////////////////
+
     public void StartButtonDown()
     {
+        animator.SetTrigger("GameStart");
+       
 
+        //つきのくんがカメラワークいじる
     }
 
     public void CreditButtonDown()
@@ -55,13 +67,35 @@ public class TitleUIScript : MonoBehaviour
 
     }
 
-    public void QuitButtonDown() 
+    public void QuitButtonDown()
     {
-       gameManager.Invoke("GameEnd",1.5f);
+        gameManager.Invoke("GameEnd", 1.5f);
     }
 
     public void SettingButtonDown()
     {
-        
+        SettingPanel.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(TutorialButton.gameObject);
+    }
+
+    public void TutorialButtonDown()
+    {
+
+    }
+
+    public void SoundButtonDown()
+    {
+
+    }
+
+    public void NullButtonDown()
+    {
+
+    }
+
+    public void ReturnButtonDown()
+    {
+        SettingPanel.gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(StartButton.gameObject);
     }
 }
