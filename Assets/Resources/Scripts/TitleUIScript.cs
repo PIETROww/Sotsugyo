@@ -21,8 +21,10 @@ public class TitleUIScript : MonoBehaviour
     [SerializeField] private Button SettingButton;
 
     [SerializeField] private GameObject SettingPanel;
+    [SerializeField] private GameObject CreditPanel;
     
     [SerializeField] private Button TutorialButton;
+    [SerializeField] private Button ReturnButton;
 
     void Start()
     {
@@ -30,6 +32,7 @@ public class TitleUIScript : MonoBehaviour
         animator = gameObject.GetComponent<Animator>();
         eventSystem = EventSystem.current;
         SettingPanel.gameObject.SetActive(false);
+        CreditPanel.gameObject.SetActive(false);
     }
 
     void Update()
@@ -64,7 +67,8 @@ public class TitleUIScript : MonoBehaviour
 
     public void CreditButtonDown()
     {
-
+        CreditPanel.gameObject.SetActive(true);
+        EventSystem.current.SetSelectedGameObject(ReturnButton.gameObject);
     }
 
     public void QuitButtonDown()
@@ -96,6 +100,7 @@ public class TitleUIScript : MonoBehaviour
     public void ReturnButtonDown()
     {
         SettingPanel.gameObject.SetActive(false);
+        CreditPanel.gameObject.SetActive(false);
         EventSystem.current.SetSelectedGameObject(StartButton.gameObject);
     }
 }
