@@ -24,6 +24,7 @@ public class TitleUIScript : MonoBehaviour
     //Setting（設定）ボタンが押された際に出てくるボタンたち
     [SerializeField] private Button TutorialButton; //チュートリアル遷移ボタン
     [SerializeField] private Button ReturnButton;　//戻るボタン
+    [SerializeField] private GameObject MasterSlider;
 
 
     //ボタンが押された際の各種パネル（背景）たち
@@ -105,7 +106,8 @@ public class TitleUIScript : MonoBehaviour
     public void SoundButtonDown()
     {
         SoundPanel.gameObject.SetActive(true);
-        EventSystem.current.SetSelectedGameObject(ReturnButton.gameObject);
+        SettingPanel.gameObject.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(MasterSlider.gameObject);
     }
 
     public void NullButtonDown()
