@@ -12,13 +12,4 @@ public class Clear_Move : MonoBehaviour
         animator= GetComponent<Animator>();
         animator.SetBool("Move", false);
     }
-
-   //キャラクターにぶつかったらアニメーションする
-    void OnCollisionEnter(Collision collision)
-    { //
-        if (collision.gameObject.name == "Player")
-        {
-            animator.SetBool("Move", true);
-        }
-    }
 }
