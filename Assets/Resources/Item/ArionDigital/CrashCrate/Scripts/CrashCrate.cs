@@ -11,6 +11,7 @@
         public GameObject fracturedCrate;
         [Header("Audio")]
         public AudioSource crashAudioClip;
+        public GameObject healitemPrefab;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -19,6 +20,7 @@
             fracturedCrate.SetActive(true);
             crashAudioClip.Play();
             Destroy(this.gameObject, 3.0f);
+            Instantiate(healitemPrefab, new Vector3(transform.position.x, transform.position.y + 3.0f, transform.position.z), Quaternion.identity);
         }
 
         [ContextMenu("Test")]
