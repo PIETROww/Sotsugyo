@@ -11,12 +11,13 @@ public class Player : MonoBehaviour
         Damage,
         Dead,
     }
-    State state;
+    private State state;
 
-    float inputX, inputZ;
-    Rigidbody rb;
-    Vector3 moveForward;
+    private float inputX, inputZ;
+    private Rigidbody rb;
+    private Vector3 moveForward;
 
+    //ƒXƒe[ƒ^ƒX--------------------------
     public int HP = 5;
     public int ATK = 1;
     public float speed = 5f;
@@ -39,13 +40,25 @@ public class Player : MonoBehaviour
     [SerializeField]
     string JumpButtonName = "Jump";
 
-    bool isGrounded = false;
-    bool jumping = false;
-    float jumpTime = 0;
-    RaycastHit hit;
-    Transform tr;
-    //-----------------------------------
+    private bool isGrounded = false;
+    private bool jumping = false;
+    private float jumpTime = 0;
+    private RaycastHit hit;
+    private Transform tr;
 
+    //UŒ‚--------------------------------
+    public GameObject attackRange;
+    public float attackTime = 1.0f;
+    private float attackCnt = 0.0f;
+
+    //ƒ_ƒ[ƒW‚ğó‚¯‚½‚Æ‚«‚Ìˆ—----------
+    public float damageTime = 2.0f;
+    private float damageCnt = 0.0f;
+
+    //–³“G--------------------------------
+    public float mutekiTime = 10.0f;
+    private float timeCnt = 0.0f;
+    private bool mutekiFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +77,6 @@ public class Player : MonoBehaviour
 
         //‚±‚±‚©‚çƒWƒƒƒ“ƒv
         isGrounded = CheckGroundStatus();
-        //Debug.Log(isGrounded);
 
         // ƒWƒƒƒ“ƒv‚ÌŠJn”»’è
         if (isGrounded && Input.GetButton(JumpButtonName))
@@ -85,7 +97,8 @@ public class Player : MonoBehaviour
             }
         }
 
-
+        //Šm”F
+        //Debug.Log(isGrounded);
         Debug.Log(this.state);
     }
 
@@ -103,11 +116,15 @@ public class Player : MonoBehaviour
 
         if (moveForward != Vector3.zero)
         {
-            transform.rotation=Quaternion.LookRotation(moveForward);
+            transform.rotation = Quaternion.LookRotation(moveForward);
         }
 
+        //ó‘Ô‘JˆÚ
         StateThink();
+        //ó‘Ô–ˆ‚Ìˆ—
         StateMove();
+        //–³“Gó‘Ô
+        Muteki();
     }
 
     private void StateThink()
@@ -119,25 +136,33 @@ public class Player : MonoBehaviour
                 if (jumping) { this.state = State.Jump; }
                 //UŒ‚‚Ö‚Ì‘JˆÚ
                 //ƒ_ƒ[ƒW‚Ö‚Ì‘JˆÚ
-                if (this.HP <= 0) { this.state = State.Dead; }
                 break;
             case State.Move:
                 if (moveForward.magnitude <= 0) { this.state = State.Idle; }
                 if (jumping) { this.state = State.Jump; }
                 //UŒ‚‚Ö‚Ì‘JˆÚ
                 //ƒ_ƒ[ƒW‚Ö‚Ì‘JˆÚ
-                //€–S‚Ö‚Ì‘JˆÚ
                 break;
             case State.Jump:
                 if (isGrounded) { this.state = State.Idle; }
                 //UŒ‚‚Ö‚Ì‘JˆÚ
                 //ƒ_ƒ[ƒW‚Ö‚Ì‘JˆÚ
-                //€–S‚Ö‚Ì‘JˆÚ
                 break;
 
             case State.Attack:
+                if (attackTime <= attackCnt) 
+                {
+                    attackCnt = 0.0f;
+                    this.state = State.Idle;
+                }
                 break;
             case State.Damage:
+                if (damageTime <= damageCnt) 
+                {
+                    damageCnt = 0.0f;
+                    this.state = State.Idle; 
+                }
+                    if (this.HP <= 0) { this.state = State.Dead; }
                 break;
 
         }
@@ -148,7 +173,6 @@ public class Player : MonoBehaviour
         switch (this.state)
         {
             case State.Idle:
-
                 break;
             case State.Move:
                 Move();
@@ -196,12 +220,14 @@ public class Player : MonoBehaviour
 
     void Attack()
     {
+        attackRange.SetActive(true);
+        attackCnt += Time.deltaTime;
 
     }
 
     void Damage()
     {
-
+        damageCnt += Time.deltaTime;
     }
 
     void Dead()
@@ -209,6 +235,29 @@ public class Player : MonoBehaviour
 
     }
 
+
+    private void Muteki()
+    {
+        //–³“Gƒtƒ‰ƒO‚ªtrue‚Ì‚Æ‚«‚ÉÀs‚·‚é
+        if (mutekiFlag)
+        {
+            Debug.Log("–³“Gó‘Ô");
+
+            //–³“GŠÔ‚ği‚ß‚é
+            timeCnt += Time.deltaTime;
+
+            //–³“GŠÔ‚ğ‰ß‚¬‚½‚Æ‚«
+            if (timeCnt >= mutekiTime)
+            {
+                Debug.Log("–³“Gó‘ÔI‚í‚è");
+
+                //–³“Gƒtƒ‰ƒO‚ğfalse‚É‚·‚é
+                mutekiFlag = false;
+                //–³“GŠÔ‚ğƒŠƒZƒbƒg‚·‚é
+                timeCnt = 0.0f;
+            }
+        }
+    }
 
     bool CheckGroundStatus()
     {
@@ -226,5 +275,24 @@ public class Player : MonoBehaviour
             isHit = true;
         }
         return isHit;
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        //‚Ô‚Â‚©‚Á‚½‘ÎÛ‚ª–³“GƒAƒCƒeƒ€‚Ìƒ^ƒO‚Ìê‡
+        if (other.gameObject.tag == "MutekiItem")
+        {
+            //–³“Gƒtƒ‰ƒO‚ğtrue‚É‚·‚é
+            mutekiFlag = true;
+        }
+
+        if (other.gameObject.tag == "Enemy")
+        {
+            //–³“G‚Ì‚ÍA“G‚ğ“|‚·
+            if (mutekiFlag)
+            {
+                Destroy(other.gameObject);
+            }
+        }
     }
 }
