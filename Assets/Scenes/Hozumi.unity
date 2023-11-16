@@ -2860,6 +2860,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 137848, guid: b274f055acd44484e979267107f9a3c4, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1599774886}
+    - targetCorrespondingSourceObject: {fileID: 137848, guid: b274f055acd44484e979267107f9a3c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1599774887}
   m_SourcePrefab: {fileID: 100100000, guid: b274f055acd44484e979267107f9a3c4, type: 3}
 --- !u!1001 &1584160349
 PrefabInstance:
@@ -3047,6 +3050,54 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 19.51, y: 5.92, z: 11.09}
   m_Center: {x: 0, y: 3.31, z: 0}
+--- !u!114 &1599774887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1599774877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8b5c8c9cebcae344bb2b9b0e92f743c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HP: 5
+  ATK: 1
+  speed: 5
+  jumpPower: 5
+  jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxJumpTime: 1
+  groundCheckRadius: 0.4
+  groundCheckOffsetY: 0.07
+  groundCheckDistance: 0.2
+  groundLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  JumpButtonName: Jump
 --- !u!1001 &1644675359
 PrefabInstance:
   m_ObjectHideFlags: 0
