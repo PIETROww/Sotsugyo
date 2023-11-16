@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class JumpSample : MonoBehaviour
@@ -18,7 +16,7 @@ public class JumpSample : MonoBehaviour
     [SerializeField]
     float groundCheckRadius = 0.4f;
     [SerializeField]
-    float groundCheckOffsetY = 0.45f;
+    float groundCheckOffsetY = 0.07f;
     [SerializeField]
     float groundCheckDistance = 0.2f;
     [SerializeField]
@@ -34,12 +32,13 @@ public class JumpSample : MonoBehaviour
 
     void Start()
     {
-        thisTransform = transform;
+        thisTransform = this.transform;
     }
 
     void Update()
     {
         isGrounded = CheckGroundStatus();
+        Debug.Log(isGrounded);
 
         // ジャンプの開始判定
         if (isGrounded && Input.GetButton(JumpButtonName))
@@ -92,7 +91,35 @@ public class JumpSample : MonoBehaviour
     // 接地判定
     bool CheckGroundStatus()
     {
-        return Physics.SphereCast(thisTransform.position + groundCheckOffsetY * Vector3.up, groundCheckRadius, Vector3.down, out hit, groundCheckDistance, groundLayers, QueryTriggerInteraction.Ignore);
+        bool isHit = false;
+        if(Physics.SphereCast(
+            thisTransform.position + groundCheckOffsetY * Vector3.up,
+            groundCheckRadius,
+            Vector3.down,
+            out hit,
+            groundCheckDistance,
+            groundLayers,
+            QueryTriggerInteraction.Ignore
+            ))
+        {
+            isHit = true;
+        }
+        return isHit;
     }
 
+    private void OnDrawGizmos()
+    {
+        //Gizmos.DrawWireSphere(thisTransform.position + groundCheckOffsetY * Vector3.up, groundCheckRadius);
+        //Gizmos.DrawRay(thisTransform.position + groundCheckOffsetY * Vector3.up, groundCheckDistance * Vector3.down);
+
+
+        //if (CheckGroundStatus())
+        //{
+        //    // SphereCastがヒットした場合、ヒットしたポイントを可視化します：chatGPT
+        //    Debug.DrawRay(thisTransform.position, Vector3.down * hit.distance, Color.red);
+        //    Gizmos.color = Color.red;
+        //    Gizmos.DrawWireSphere(thisTransform.position + Vector3.down * hit.distance, groundCheckRadius);
+        //}
+
+    }
 }
