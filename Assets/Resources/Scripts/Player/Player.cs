@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     private Vector3 moveForward;
 
+    public Animator animator; 
+
     //ステータス--------------------------
     public int HP = 5;
     public int ATK = 1;
@@ -173,6 +175,7 @@ public class Player : MonoBehaviour
         switch (this.state)
         {
             case State.Idle:
+                animator.SetTrigger("Idle");
                 break;
             case State.Move:
                 Move();
@@ -192,6 +195,7 @@ public class Player : MonoBehaviour
                 break;
         }
     }
+
     private void Move()
     {
         tr.position += moveForward * speed * Time.deltaTime;
@@ -292,6 +296,10 @@ public class Player : MonoBehaviour
             if (mutekiFlag)
             {
                 Destroy(other.gameObject);
+            }
+            else
+            {
+                HP -= 1;
             }
         }
     }
