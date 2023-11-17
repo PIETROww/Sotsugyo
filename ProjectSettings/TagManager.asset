@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Enemy
   - MutekiItem
+  - Kibako
+  - HealItem
+  - ChangeItem
+  - SpeedupItem
   layers:
   - Default
   - TransparentFX
