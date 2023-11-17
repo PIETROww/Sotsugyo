@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class HealItemController : MonoBehaviour
+public class ChangeItemController : MonoBehaviour
 {
     public float pos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,10 +26,4 @@ public class HealItemController : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-    //Playerのスクリプト 当たり判定の箇所に追加
-    //if (other.gameObject.tag == "HealItem")
-    //{
-    //    //回復する処理
-    //}
 }

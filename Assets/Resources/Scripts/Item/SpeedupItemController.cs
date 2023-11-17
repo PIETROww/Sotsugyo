@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class HealItemController : MonoBehaviour
+public class SpeedupItemController : MonoBehaviour
 {
     public float pos;
     // Start is called before the first frame update
@@ -15,7 +14,7 @@ public class HealItemController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3(transform.position.x, pos + Mathf.PingPong(Time.time, 3.0f), transform.position.z);
+        this.transform.position = new Vector3(this.transform.position.x, pos + Mathf.PingPong(Time.time, 3.0f), this.transform.position.z);
         this.transform.Rotate(0.0f, 1.0f, 0.0f, Space.World);
     }
 
@@ -26,10 +25,4 @@ public class HealItemController : MonoBehaviour
             Destroy(this.gameObject);
         }
     }
-
-    //Playerのスクリプト 当たり判定の箇所に追加
-    //if (other.gameObject.tag == "HealItem")
-    //{
-    //    //回復する処理
-    //}
 }
