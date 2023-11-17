@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
     private Vector3 moveForward;
 
-    public Animator animator; 
+    [SerializeField] private Animator animator;
 
     //ステータス--------------------------
     public int HP = 5;
@@ -62,11 +62,19 @@ public class Player : MonoBehaviour
     private float timeCnt = 0.0f;
     private bool mutekiFlag = false;
 
+    //変身--------------------------------
+    public GameObject[] characters;
+    bool catFlag = false,
+        duckFlag = false,
+        penguinFlag = true,     //最初はペンギンにしておく
+        sheepFlag = false;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         tr = this.transform;
+
     }
 
     // Update is called once per frame
@@ -81,7 +89,7 @@ public class Player : MonoBehaviour
         isGrounded = CheckGroundStatus();
 
         // ジャンプの開始判定
-        if (isGrounded && Input.GetButton(JumpButtonName))
+        if (isGrounded && Input.GetButtonDown(JumpButtonName))
         {
             jumping = true;
         }
@@ -127,6 +135,8 @@ public class Player : MonoBehaviour
         StateMove();
         //無敵状態
         Muteki();
+        //変身
+        Transformation();
     }
 
     private void StateThink()
@@ -152,21 +162,20 @@ public class Player : MonoBehaviour
                 break;
 
             case State.Attack:
-                if (attackTime <= attackCnt) 
+                if (attackTime <= attackCnt)
                 {
                     attackCnt = 0.0f;
                     this.state = State.Idle;
                 }
                 break;
             case State.Damage:
-                if (damageTime <= damageCnt) 
+                if (damageTime <= damageCnt)
                 {
                     damageCnt = 0.0f;
-                    this.state = State.Idle; 
+                    this.state = State.Idle;
                 }
-                    if (this.HP <= 0) { this.state = State.Dead; }
+                if (this.HP <= 0) { this.state = State.Dead; }
                 break;
-
         }
     }
 
@@ -178,9 +187,11 @@ public class Player : MonoBehaviour
                 animator.SetTrigger("Idle");
                 break;
             case State.Move:
+                animator.SetTrigger("Walk");
                 Move();
                 break;
             case State.Jump:
+                animator.SetTrigger("jump");
                 Move();
                 Jump();
                 break;
@@ -188,6 +199,7 @@ public class Player : MonoBehaviour
                 Attack();
                 break;
             case State.Damage:
+                animator.SetTrigger("stun");
                 Damage();
                 break;
             case State.Dead:
@@ -226,7 +238,6 @@ public class Player : MonoBehaviour
     {
         attackRange.SetActive(true);
         attackCnt += Time.deltaTime;
-
     }
 
     void Damage()
@@ -263,6 +274,41 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Transformation()
+    {
+        if (catFlag)
+        {
+            characters[0].SetActive(true);
+            characters[1].SetActive(false);
+            characters[2].SetActive(false);
+            characters[3].SetActive(false);
+            animator = characters[0].GetComponent<Animator>();
+        }
+        if (duckFlag)
+        {
+            characters[0].SetActive(false);
+            characters[1].SetActive(true);
+            characters[2].SetActive(false);
+            characters[3].SetActive(false);
+            animator = characters[1].GetComponent<Animator>();
+        }
+        if (penguinFlag)
+        {
+            characters[0].SetActive(false);
+            characters[1].SetActive(false);
+            characters[2].SetActive(true);
+            characters[3].SetActive(false);
+            animator = characters[2].GetComponent<Animator>();
+        }
+        if (sheepFlag)
+        {
+            characters[0].SetActive(false);
+            characters[1].SetActive(false);
+            characters[2].SetActive(false);
+            characters[3].SetActive(true);
+            animator = characters[3].GetComponent<Animator>();
+        }
+    }
     bool CheckGroundStatus()
     {
         bool isHit = false;
@@ -281,26 +327,51 @@ public class Player : MonoBehaviour
         return isHit;
     }
 
+
+    public GameObject[] tamesi;
     private void OnCollisionEnter(Collision other)
     {
         //ぶつかった対象が無敵アイテムのタグの場合
         if (other.gameObject.tag == "MutekiItem")
-        {
-            //無敵フラグをtrueにする
             mutekiFlag = true;
-        }
 
         if (other.gameObject.tag == "Enemy")
         {
             //無敵の時は、敵を倒す
             if (mutekiFlag)
-            {
                 Destroy(other.gameObject);
-            }
+            //無敵でない時は、ダメージを受ける
             else
-            {
                 HP -= 1;
-            }
+        }
+
+        if (other.gameObject == tamesi[0])
+        {
+            catFlag = true;
+            duckFlag = false;
+            penguinFlag = false;
+            sheepFlag = false;
+        }    
+        if(other.gameObject == tamesi[1])
+        {
+            catFlag = false;
+            duckFlag = true;
+            penguinFlag = false;
+            sheepFlag = false;
+        }
+        if (other.gameObject == tamesi[2])
+        {
+            catFlag = false;
+            duckFlag = false;
+            penguinFlag = true;
+            sheepFlag = false;
+        }
+        if (other.gameObject == tamesi[3])
+        {
+            catFlag = false;
+            duckFlag = false;
+            penguinFlag = false;
+            sheepFlag = true;
         }
     }
 }
