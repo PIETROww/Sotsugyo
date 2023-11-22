@@ -1,7 +1,7 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using System.Linq;
 using DG.Tweening;
 using TMPro;
@@ -26,6 +26,8 @@ public class TutorialManager : MonoBehaviour
     // チュートリアル表示時のUI移動距離
     private float fade_pos_x = 350;
 
+
+    // Start is called before the first frame update
     void Start()
     {
         // チュートリアル表示用UIのインスタンス取得
@@ -46,41 +48,7 @@ public class TutorialManager : MonoBehaviour
         isEnabled = true;
     }
 
-    void Update()
-    {
-        // チュートリアルが存在し実行されていない場合に処理
-        if (currentTask != null && !task_executed)
-        {
-            // 現在のチュートリアルが実行されたか判定
-            if (currentTask.CheckTask())
-            {
-                task_executed = true;
-
-                DOVirtual.DelayedCall(currentTask.GetTransitionTime(), () =>
-                {
-                    iTween.MoveTo(TutorialTextArea.gameObject, iTween.Hash(
-                   "position", TutorialTextArea.transform.position + new Vector3(fade_pos_x, 0, 0),
-                   "time", 1f
-                   ));
-
-                    tutorialTask.RemoveAt(0);
-
-                    var nextTask = tutorialTask.FirstOrDefault();
-                    if (nextTask != null)
-                    {
-                        StartCoroutine(SetCurrentTask(nextTask, 1f));
-                    }
-                });
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            SwitchEnabled();
-        }
-    }
-
-
+    
     //新しいチュートリアルタスク設定
     protected IEnumerator SetCurrentTask(TutorialTaskScript task, float time = 0)
     {
