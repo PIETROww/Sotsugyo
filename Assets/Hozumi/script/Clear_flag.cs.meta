@@ -1,9 +1,10 @@
 fileFormatVersion: 2
-guid: 54e68b9b66d915246a8609f5f5dffefb
+guid: 89ec8fff913adeb40960cf2d1ad7372a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - anime_clip: {fileID: 7400000, guid: ab2bf45ea4517d8438d1902a412b0e61, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
