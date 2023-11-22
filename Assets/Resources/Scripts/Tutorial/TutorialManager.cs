@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.UI;
 using DG.Tweening;
+using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
     // チュートリアル用UI
-    protected RectTransform tutorialTextArea;
-    protected Text TutorialTitle;
-    protected Text TutorialText;
+    protected RectTransform TutorialTextArea;
+    protected TextMeshProUGUI TutorialTitle;
+    protected TextMeshProUGUI TutorialText;
 
     // チュートリアルタスク
     protected TutorialTaskScript currentTask;
@@ -29,9 +29,9 @@ public class TutorialManager : MonoBehaviour
     void Start()
     {
         // チュートリアル表示用UIのインスタンス取得
-        tutorialTextArea = GameObject.Find("TutorialTextArea").GetComponent<RectTransform>();
-        TutorialTitle = tutorialTextArea.Find("Title").GetComponent<Text>();
-        TutorialText = tutorialTextArea.Find("Text").GetComponentInChildren<Text>();
+        TutorialTextArea = GameObject.Find("TutorialTextArea").GetComponent<RectTransform>();
+        TutorialTitle = TutorialTextArea.Find("Title").GetComponentInChildren<TextMeshProUGUI>();
+        TutorialText = TutorialTextArea.Find("Text").GetComponentInChildren<TextMeshProUGUI>();
 
         // チュートリアルの一覧
         tutorialTask = new List<TutorialTaskScript>()
@@ -58,10 +58,10 @@ public class TutorialManager : MonoBehaviour
 
                 DOVirtual.DelayedCall(currentTask.GetTransitionTime(), () =>
                 {
-                    //iTween.MoveTo(tutorialTextArea.gameObject, iTween.Hash(
-                     //   "position", tutorialTextArea.transform.position + new Vector3(fade_pos_x, 0, 0),
-                     //   "time", 1f
-                    //));
+                    iTween.MoveTo(TutorialTextArea.gameObject, iTween.Hash(
+                   "position", TutorialTextArea.transform.position + new Vector3(fade_pos_x, 0, 0),
+                   "time", 1f
+                   ));
 
                     tutorialTask.RemoveAt(0);
 
@@ -74,7 +74,7 @@ public class TutorialManager : MonoBehaviour
             }
         }
 
-        if (Input.GetButtonDown("Help"))
+        if (Input.GetKeyDown(KeyCode.H))
         {
             SwitchEnabled();
         }
@@ -97,10 +97,10 @@ public class TutorialManager : MonoBehaviour
         // チュートリアルタスク設定時用の関数を実行
         task.OnTaskSetting();
 
-      //  iTween.MoveTo(tutorialTextArea.gameObject, iTween.Hash(
-          //  "position", tutorialTextArea.transform.position - new Vector3(fade_pos_x, 0, 0),
-           // "time", 1f
-       // ));
+        iTween.MoveTo(TutorialTextArea.gameObject, iTween.Hash(
+            "position", TutorialTextArea.transform.position - new Vector3(fade_pos_x, 0, 0),
+            "time", 1f
+        ));
     }
 
     //チュートリアルの有効無効切り替え
@@ -110,6 +110,6 @@ public class TutorialManager : MonoBehaviour
 
         // UIの表示切り替え
         float alpha = isEnabled ? 1f : 0;
-        tutorialTextArea.GetComponent<CanvasGroup>().alpha = alpha;
+        TutorialTextArea.GetComponent<CanvasGroup>().alpha = alpha;
     }
 }
