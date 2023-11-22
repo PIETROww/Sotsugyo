@@ -31,10 +31,7 @@ public class TitleUIScript : MonoBehaviour
     [SerializeField] private GameObject SettingPanel;
     [SerializeField] private GameObject CreditPanel;
     [SerializeField]private GameObject SoundPanel;
-    [SerializeField] private GameObject TutorialPanel;
-
-
-
+    
 
     void Start()
     {
@@ -46,7 +43,6 @@ public class TitleUIScript : MonoBehaviour
         SettingPanel.gameObject.SetActive(false);
         CreditPanel.gameObject.SetActive(false);
         SoundPanel.gameObject.SetActive(false);
-        TutorialPanel.gameObject.SetActive(false);
     }
 
     void Update()
@@ -104,7 +100,7 @@ public class TitleUIScript : MonoBehaviour
 
     public void TutorialButtonDown()
     {
-        TutorialPanel.gameObject.SetActive(true);
+
     }
 
     public void SoundButtonDown()
