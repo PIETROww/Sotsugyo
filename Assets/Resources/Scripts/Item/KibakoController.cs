@@ -19,6 +19,6 @@ public class KibakoController : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         Destroy(this.gameObject);
-        Instantiate(healitemPrefab, new Vector3(transform.position.x, transform.position.y + 3.0f, transform.position.z), Quaternion.Euler(0, 0, 20));
+        Instantiate(healitemPrefab, new Vector3(transform.position.x, transform.position.y + 3.0f, transform.position.z), healitemPrefab.transform.rotation);
     }
 }
