@@ -1,26 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-public class Clear_Move : MonoBehaviour
-{
-    private Animator animator;
-    private GameManager gameManager;
 
-    // Start is called before the first frame update
-    private void Start()
+public class Clear_move : MonoBehaviour
+{
+    Animator animator;
+    Clear_flag clear;
+    // private GameManager gameManager;
+   
+
+    void Start()
     {
-        animator= GetComponent<Animator>();
-        gameManager = GameManager.instance;
+        animator = GetComponent<Animator>();
         animator.SetBool("Move", false);
     }
-    private void OnCollisionEnter(Collision collision)
-    {
+    // Update is called once per frame
+    public void Animation()
+     {
         animator.SetBool("Move", true);
-        Invoke("SceneLoad", 5);
-    }
-    private void SceneLoad()
-    {
-        gameManager.LoadScene("Hozumi2");
-    }
+        Debug.Log("Movetrue");
+     }
 }
