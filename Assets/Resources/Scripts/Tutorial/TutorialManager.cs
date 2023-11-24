@@ -45,26 +45,6 @@ public class TutorialManager : MonoBehaviour
         isEnabled = true;
     }
 
-    //// Start is called before the first frame update
-    //void Start()
-    //{
-    //    // チュートリアル表示用UIのインスタンス取得
-    //    TutorialTextArea = GameObject.Find("TutorialTextArea").GetComponent<RectTransform>();
-    //    TutorialTitle = TutorialTextArea.Find("Title").GetComponentInChildren<TextMeshProUGUI>();
-    //    TutorialText = TutorialTextArea.Find("Text").GetComponentInChildren<TextMeshProUGUI>();
-
-    //    // チュートリアルの一覧
-    //    tutorialTask = new List<TutorialTask>()
-    //    {
-    //new TutorialMove(),
-    //new TutorialAttack(),
-    //    };
-
-    //    // 最初のチュートリアルを設定
-    //    StartCoroutine(SetCurrentTask(tutorialTask.First()));
-    //    isEnabled = true;
-    //}
-
     void Update()
     {
         // チュートリアルが存在し実行されていない場合に処理
