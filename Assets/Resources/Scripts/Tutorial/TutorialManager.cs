@@ -14,8 +14,8 @@ public class TutorialManager : MonoBehaviour
     protected TextMeshProUGUI TutorialText;
 
     // チュートリアルタスク
-    protected TutorialTaskScript currentTask;
-    protected List<TutorialTaskScript> tutorialTask;
+    protected TutorialTask currentTask;
+    protected List<TutorialTask> tutorialTask;
 
     // チュートリアル表示フラグ
     private bool isEnabled;
@@ -26,9 +26,7 @@ public class TutorialManager : MonoBehaviour
     // チュートリアル表示時のUI移動距離
     private float fade_pos_x = 350;
 
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         // チュートリアル表示用UIのインスタンス取得
         TutorialTextArea = GameObject.Find("TutorialTextArea").GetComponent<RectTransform>();
@@ -36,21 +34,71 @@ public class TutorialManager : MonoBehaviour
         TutorialText = TutorialTextArea.Find("Text").GetComponentInChildren<TextMeshProUGUI>();
 
         // チュートリアルの一覧
-        tutorialTask = new List<TutorialTaskScript>()
+        tutorialTask = new List<TutorialTask>()
         {
-    new TutorialMoveScript(),
-    new TutorialAttackScript(),
+    new TutorialMove(),
+    new TutorialAttack(),
         };
 
         // 最初のチュートリアルを設定
         StartCoroutine(SetCurrentTask(tutorialTask.First()));
-
         isEnabled = true;
     }
 
-    
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    // チュートリアル表示用UIのインスタンス取得
+    //    TutorialTextArea = GameObject.Find("TutorialTextArea").GetComponent<RectTransform>();
+    //    TutorialTitle = TutorialTextArea.Find("Title").GetComponentInChildren<TextMeshProUGUI>();
+    //    TutorialText = TutorialTextArea.Find("Text").GetComponentInChildren<TextMeshProUGUI>();
+
+    //    // チュートリアルの一覧
+    //    tutorialTask = new List<TutorialTask>()
+    //    {
+    //new TutorialMove(),
+    //new TutorialAttack(),
+    //    };
+
+    //    // 最初のチュートリアルを設定
+    //    StartCoroutine(SetCurrentTask(tutorialTask.First()));
+    //    isEnabled = true;
+    //}
+
+    void Update()
+    {
+        // チュートリアルが存在し実行されていない場合に処理
+        if (currentTask != null && !task_executed)
+        {
+            // 現在のチュートリアルが実行されたか判定
+            if (currentTask.CheckTask())
+            {
+                task_executed = true;
+
+                DOVirtual.DelayedCall(currentTask.GetTransitionTime(), () => {
+                    iTween.MoveTo(TutorialTextArea.gameObject, iTween.Hash(
+                        "position", TutorialTextArea.transform.position + new Vector3(fade_pos_x, 0, 0),
+                        "time", 1f
+                    ));
+
+                    tutorialTask.RemoveAt(0);
+
+                    var nextTask = tutorialTask.FirstOrDefault();
+                    if (nextTask != null)
+                    {
+                        StartCoroutine(SetCurrentTask(nextTask, 1f));
+                    }
+                });
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            SwitchEnabled();
+        }
+    }
     //新しいチュートリアルタスク設定
-    protected IEnumerator SetCurrentTask(TutorialTaskScript task, float time = 0)
+    protected IEnumerator SetCurrentTask(TutorialTask task, float time = 0)
     {
         // timeが指定されている場合は待機
         yield return new WaitForSeconds(time);
