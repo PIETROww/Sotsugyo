@@ -21,7 +21,7 @@ public class TutorialAttack : TutorialTask
 
     public bool CheckTask()
     {
-        if (Input.GetButton("Attack"))
+        if (Input.GetKey(KeyCode.K))
         {
             return true;
         }
