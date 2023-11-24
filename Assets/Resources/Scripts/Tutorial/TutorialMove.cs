@@ -1,8 +1,10 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialMoveScript : TutorialTaskScript
+public class TutorialMove : TutorialTask
 {
-   public string GetTitle()
+    public string GetTitle()
     {
         return "Šî–{“®ì@ˆÚ“®";
     }
@@ -23,7 +25,7 @@ public class TutorialMoveScript : TutorialTaskScript
         float axis_h = Input.GetAxis("Horizontal");
         float axis_v = Input.GetAxis("Vertical");
 
-        if(0<axis_v||0<axis_h)
+        if (0 < axis_v || 0 < axis_h)
         {
             return true;
         }

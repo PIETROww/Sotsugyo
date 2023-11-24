@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface TutorialTaskScript 
+public interface TutorialTask
 {
     //チュートリアルタイトル取得
     string GetTitle();

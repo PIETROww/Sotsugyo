@@ -12,7 +12,7 @@ using UnityEngine.UI;
 public class TitleUIScript : MonoBehaviour
 {
     private GameManager gameManager;
-    public Animator animator;
+    private Animator animator;
     private EventSystem eventSystem;
 
     //タイトル画面の一番最初に出てくるボタンたち

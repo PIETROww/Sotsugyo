@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class TutorialAttackScript : TutorialTaskScript
+public class TutorialAttack : TutorialTask
 {
     public string GetTitle()
     {
