@@ -5,7 +5,7 @@ public class Clear_flag : MonoBehaviour
     Animator animator;
      private GameManager gameManager;
    [SerializeField] private Image clearImage;//UI‚Ì‰æ‘œ
-    Clear_move cm;
+    //Clear_move cm;
     // Start is called before the first frame update
     private void Start()
     {
@@ -13,7 +13,7 @@ public class Clear_flag : MonoBehaviour
         clearImage.enabled = false;//•\Ž¦‚©”ñ•\Ž¦‚©
         animator = GetComponent<Animator>();
         gameManager = GameManager.instance;
-         cm = GetComponent<Clear_move>();
+         //cm = GetComponent<Clear_move>();
 
         animator.SetBool("Move", false);
         
@@ -25,7 +25,7 @@ public class Clear_flag : MonoBehaviour
         if(other.gameObject.tag=="Player")
         {
             clearImage.enabled = true;
-            cm.Animation();
+            //cm.Animation();
         }
     }
    
