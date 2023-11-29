@@ -12,6 +12,7 @@ using UnityEngine.UI;
 public class TitleUIScript : MonoBehaviour
 {
     private GameManager gameManager;
+    private GameUIScript gameUI;
     private Animator animator;
     private EventSystem eventSystem;
 
@@ -33,11 +34,11 @@ public class TitleUIScript : MonoBehaviour
     [SerializeField] private GameObject SoundPanel;
     [SerializeField] private GameObject TutorialPanel;
 
-    [SerializeField] private GameObject GameStartUI;
 
     void Start()
     {
         gameManager = GameManager.instance;
+        gameUI=GetComponent<GameUIScript>();
         animator = gameObject.GetComponent<Animator>();
         eventSystem = EventSystem.current;
 
@@ -46,8 +47,6 @@ public class TitleUIScript : MonoBehaviour
         CreditPanel.gameObject.SetActive(false);
         SoundPanel.gameObject.SetActive(false);
         TutorialPanel.gameObject.SetActive(false);
-
-        GameStartUI.SetActive(false);
     }
 
     void Update()
@@ -81,13 +80,8 @@ public class TitleUIScript : MonoBehaviour
     {
         animator.SetTrigger("GameStart");
 
-        Invoke("StartUI", 7.5f);
+        gameUI.Invoke("MenuUI", 7.5f);
         //Ç¬Ç´ÇÃÇ≠ÇÒÇ™ÉJÉÅÉâÉèÅ[ÉNÇ¢Ç∂ÇÈ
-    }
-
-    public void StartUI()
-    {
-        GameStartUI.SetActive(true);
     }
 
     public void CreditButtonDown()
