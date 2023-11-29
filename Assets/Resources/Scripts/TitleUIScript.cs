@@ -30,8 +30,10 @@ public class TitleUIScript : MonoBehaviour
     //ボタンが押された際の各種パネル（背景）たち
     [SerializeField] private GameObject SettingPanel;
     [SerializeField] private GameObject CreditPanel;
-    [SerializeField]private GameObject SoundPanel;
+    [SerializeField] private GameObject SoundPanel;
     [SerializeField] private GameObject TutorialPanel;
+
+    [SerializeField] private GameObject GameStartUI;
 
     void Start()
     {
@@ -44,6 +46,8 @@ public class TitleUIScript : MonoBehaviour
         CreditPanel.gameObject.SetActive(false);
         SoundPanel.gameObject.SetActive(false);
         TutorialPanel.gameObject.SetActive(false);
+
+        GameStartUI.SetActive(false);
     }
 
     void Update()
@@ -76,9 +80,14 @@ public class TitleUIScript : MonoBehaviour
     public void StartButtonDown()
     {
         animator.SetTrigger("GameStart");
-       
 
+        Invoke("StartUI", 7.5f);
         //つきのくんがカメラワークいじる
+    }
+
+    public void StartUI()
+    {
+        GameStartUI.SetActive(true);
     }
 
     public void CreditButtonDown()
