@@ -109,8 +109,14 @@ public class Player : MonoBehaviour
 
         //Šm”F
         //Debug.Log(isGrounded);
-        Debug.Log(this.state);
+        //Debug.Log(this.state);
+
+        //var start = transform.position + groundCheckOffsetY * Vector3.up;
+        //var end = transform.position + groundCheckOffsetY * Vector3.up + groundCheckDistance * Vector3.down;
+        //Debug.DrawLine(start, end, Color.red);
+        //Debug.Log("start:" + start + " end:" + end);
     }
+
 
     private void FixedUpdate()
     {
@@ -325,6 +331,21 @@ public class Player : MonoBehaviour
             isHit = true;
         }
         return isHit;
+    }
+    private void OnDrawGizmos()
+    {
+        var start = transform.position + groundCheckOffsetY * Vector3.up;
+        var end = transform.position + groundCheckOffsetY * Vector3.up + groundCheckDistance * Vector3.down;
+
+        Gizmos.color = new Color(1, 0, 0, 0.5f);
+        float radius = Mathf.Max(0.01f, groundCheckRadius);
+        for(float y = start.y; y >= end.y; y -= radius)
+        {
+            Gizmos.DrawSphere(new Vector3(start.x, y, start.z), groundCheckRadius);
+            Debug.Log("gizmo y:" + y);
+        }
+
+        //Gizmos.DrawSphere(Vector3.zero, 100);
     }
 
 
