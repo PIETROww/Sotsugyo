@@ -4,6 +4,8 @@ public class Clear_flag : MonoBehaviour
 {
     Animator animator;
      private GameManager gameManager;
+    AudioSource audioSource;
+    [SerializeField] private AudioClip se1;
    [SerializeField] private Image clearImage;//UI‚Ì‰æ‘œ
     //Clear_move cm;
     // Start is called before the first frame update
@@ -13,9 +15,10 @@ public class Clear_flag : MonoBehaviour
         clearImage.enabled = false;//•\Ž¦‚©”ñ•\Ž¦‚©
         animator = GetComponent<Animator>();
         gameManager = GameManager.instance;
+        audioSource=GetComponent<AudioSource>();
          //cm = GetComponent<Clear_move>();
 
-        animator.SetBool("Move", false);
+       // animator.SetBool("Move", false);
         
     }
     
@@ -24,13 +27,15 @@ public class Clear_flag : MonoBehaviour
         Debug.Log("‚ ‚½‚Á‚½");
         if(other.gameObject.tag=="Player")
         {
+            audioSource.PlayOneShot(se1);
             clearImage.enabled = true;
             //cm.Animation();
+            Invoke("SceneLoad", 2);
         }
     }
    
     void SceneLoad()
     {
-        gameManager.LoadScene("Hozumi2");
+        gameManager.LoadScene("TitleScene");
     }
 }
