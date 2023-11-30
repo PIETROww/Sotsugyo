@@ -15,7 +15,7 @@ public class ChangeItemController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3(transform.position.x, pos + Mathf.PingPong(Time.time, 3.0f), transform.position.z);
+        this.transform.position = new Vector3(transform.position.x, pos + Mathf.PingPong(Time.time, 2.0f), transform.position.z);
         this.transform.Rotate(0.0f, 1.0f, 0.0f, Space.World);
     }
 

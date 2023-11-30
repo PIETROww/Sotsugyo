@@ -8,8 +8,11 @@ TagManager:
   - MutekiItem
   - Kibako
   - HealItem
-  - ChangeItem
   - SpeedupItem
+  - ChangeItem_Cat
+  - ChangeItem_Duck
+  - ChangeItem_Penguin
+  - ChangeItem_Sheep
   layers:
   - Default
   - TransparentFX
