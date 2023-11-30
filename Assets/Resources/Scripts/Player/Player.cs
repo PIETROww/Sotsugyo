@@ -136,7 +136,7 @@ public class Player : MonoBehaviour
         //無敵状態
         Muteki();
         //変身
-        Transformation();
+        Copy();
     }
 
     private void StateThink()
@@ -274,7 +274,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Transformation()
+    private void Copy()
     {
         if (catFlag)
         {
@@ -328,7 +328,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public GameObject[] tamesi;
+    public GameObject[] copyItem;
     private void OnCollisionEnter(Collision other)
     {
         //ぶつかった対象が無敵アイテムのタグの場合
@@ -345,28 +345,28 @@ public class Player : MonoBehaviour
                 HP -= 1;
         }
 
-        if (other.gameObject == tamesi[0])
+        if (other.gameObject == copyItem[0])
         {
             catFlag = true;
             duckFlag = false;
             penguinFlag = false;
             sheepFlag = false;
         }    
-        if(other.gameObject == tamesi[1])
+        if(other.gameObject == copyItem[1])
         {
             catFlag = false;
             duckFlag = true;
             penguinFlag = false;
             sheepFlag = false;
         }
-        if (other.gameObject == tamesi[2])
+        if (other.gameObject == copyItem[2])
         {
             catFlag = false;
             duckFlag = false;
             penguinFlag = true;
             sheepFlag = false;
         }
-        if (other.gameObject == tamesi[3])
+        if (other.gameObject == copyItem[3])
         {
             catFlag = false;
             duckFlag = false;
