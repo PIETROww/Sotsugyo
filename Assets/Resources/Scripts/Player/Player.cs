@@ -342,7 +342,7 @@ public class Player : MonoBehaviour
         for(float y = start.y; y >= end.y; y -= radius)
         {
             Gizmos.DrawSphere(new Vector3(start.x, y, start.z), groundCheckRadius);
-            Debug.Log("gizmo y:" + y);
+            //Debug.Log("gizmo y:" + y);
         }
 
         //Gizmos.DrawSphere(Vector3.zero, 100);
