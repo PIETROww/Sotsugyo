@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class Clear_flag : MonoBehaviour
 {
     Animator animator;
-     private GameManager gameManager;
+   // private GameManager gameManager;
     AudioSource audioSource;
     [SerializeField] private AudioClip se1;
    [SerializeField] private Image clearImage;//UI‚Ì‰æ‘œ
@@ -14,7 +15,7 @@ public class Clear_flag : MonoBehaviour
         clearImage = GameObject.Find("Clear").GetComponent<Image>();
         clearImage.enabled = false;//•\Ž¦‚©”ñ•\Ž¦‚©
         animator = GetComponent<Animator>();
-        gameManager = GameManager.instance;
+        //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioSource=GetComponent<AudioSource>();
          //cm = GetComponent<Clear_move>();
 
@@ -36,6 +37,6 @@ public class Clear_flag : MonoBehaviour
    
     void SceneLoad()
     {
-        gameManager.LoadScene("TitleScene");
+        SceneManager.LoadScene("TitleScene");
     }
 }
