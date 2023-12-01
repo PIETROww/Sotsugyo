@@ -2,10 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    int heartCount = 2;
+    [SerializeField] private GameObject[] heart;
+
 
     private void Awake()
     {

@@ -2986,7 +2986,7 @@ GameObject:
   - component: {fileID: 965891864}
   - component: {fileID: 965891863}
   m_Layer: 5
-  m_Name: LifeImage3
+  m_Name: LifeImage2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3769,7 +3769,7 @@ GameObject:
   - component: {fileID: 1307585033}
   - component: {fileID: 1307585032}
   m_Layer: 5
-  m_Name: LifeImage2
+  m_Name: LifeImage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4417,7 +4417,7 @@ GameObject:
   - component: {fileID: 1518394259}
   - component: {fileID: 1518394258}
   m_Layer: 5
-  m_Name: LifeImage1
+  m_Name: LifeImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6450,6 +6450,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1028a8b5959a24849829a193d6a6c4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heart:
+  - {fileID: 1518394256}
+  - {fileID: 1307585030}
+  - {fileID: 965891861}
 --- !u!4 &2143448395
 Transform:
   m_ObjectHideFlags: 0
