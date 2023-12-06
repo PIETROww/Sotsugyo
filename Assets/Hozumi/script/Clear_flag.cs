@@ -12,7 +12,7 @@ public class Clear_flag : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        clearImage = GameObject.Find("Clear").GetComponent<Image>();
+        //clearImage = GameObject.Find("Clear").GetComponent<Image>();
         clearImage.enabled = false;//•\Ž¦‚©”ñ•\Ž¦‚©
         animator = GetComponent<Animator>();
         //gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -31,12 +31,14 @@ public class Clear_flag : MonoBehaviour
             audioSource.PlayOneShot(se1);
             clearImage.enabled = true;
             //cm.Animation();
+            
             Invoke("SceneLoad", 2);
         }
     }
    
     void SceneLoad()
     {
-        SceneManager.LoadScene("TitleScene");
+        clearImage.enabled = false;
+        SceneManager.LoadScene("Hozumi2");
     }
 }
