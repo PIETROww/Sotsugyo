@@ -150,7 +150,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 8db774d63ffa4304fb8dddd6116ead54, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6409926179559655018}
+      addedObject: {fileID: -1221395186740046611}
     - targetCorrespondingSourceObject: {fileID: 100000, guid: 8db774d63ffa4304fb8dddd6116ead54, type: 3}
       insertIndex: -1
       addedObject: {fileID: 960448777177370944}
@@ -160,8 +160,8 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: 8db774d63ffa4304fb8dddd6116ead54, type: 3}
   m_PrefabInstance: {fileID: 937251348386818819}
   m_PrefabAsset: {fileID: 0}
---- !u!135 &6409926179559655018
-SphereCollider:
+--- !u!65 &-1221395186740046611
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -179,7 +179,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.18539962
+  m_Size: {x: 0.34047562, y: 0.37079924, z: 0.36437774}
   m_Center: {x: 0.00000014156103, y: -0.000000007450581, z: 0.000000014901161}
 --- !u!114 &960448777177370944
 MonoBehaviour:
