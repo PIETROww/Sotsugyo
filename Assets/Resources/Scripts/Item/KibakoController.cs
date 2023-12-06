@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class KibakoController : MonoBehaviour
 {
-    public GameObject healitemPrefab;
+    public GameObject itemPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +19,6 @@ public class KibakoController : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         Destroy(this.gameObject);
-        Instantiate(healitemPrefab, new Vector3(transform.position.x, transform.position.y + 3.0f, transform.position.z), healitemPrefab.transform.rotation);
+        Instantiate(itemPrefab, new Vector3(transform.position.x, transform.position.y + 3.0f, transform.position.z), itemPrefab.transform.rotation);
     }
 }
