@@ -14,6 +14,8 @@ public class GameUIScript : MonoBehaviour
     [SerializeField] private Button MenuButton;
     [SerializeField] private Button SousaButton;
     [SerializeField] private GameObject MenuPanel;
+
+    [SerializeField] private Button ReturnButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,10 +45,12 @@ public class GameUIScript : MonoBehaviour
     {
         sousaUI.SetActive(true);
         MenuPanel.SetActive(false);
+        EventSystem.current.SetSelectedGameObject(ReturnButton.gameObject);
     }
 
     public void ReturnButtonDown()
     {
-
+        sousaUI.SetActive(false);
+        MenuUI();
     }
 }
