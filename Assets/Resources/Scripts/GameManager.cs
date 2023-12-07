@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    int heartCount = 2;
+    int heartCount = 0;
     [SerializeField] private GameObject[] heart;
 
 
@@ -25,11 +25,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        // for(int i=0;i<HP;++i)
+        {
+            heartCount++;
+        }
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             GameEnd();
+        }
+    }
+
+    public void Heart()
+    {
+        //その数に応じて表示非表示
+        if (heartCount > 0)
+        {
+            heartCount--;
+
+            // 対応するハートオブジェクトを非アクティブにする
+            heart[heartCount].SetActive(false);
+        }
+
+        if (heartCount == 0)
+        {
+            //GameOver();
         }
     }
 
