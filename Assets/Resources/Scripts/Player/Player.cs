@@ -13,11 +13,15 @@ public class Player : MonoBehaviour
     }
     private State state;
 
+    private PlayerUniqueAction action = null;
+
     private float inputX, inputZ;
     private Rigidbody rb;
     private Vector3 moveForward;
 
     [SerializeField] private Animator animator;
+    public GameObject penguinAttack;
+    public GameObject catAttack;
 
     //ステータス--------------------------
     public int HP = 5;
@@ -75,6 +79,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tr = this.transform;
 
+        Copy();
     }
 
     // Update is called once per frame
@@ -83,7 +88,6 @@ public class Player : MonoBehaviour
         inputX = Input.GetAxis("Horizontal");
         inputZ = Input.GetAxis("Vertical");
 
-        Debug.Log(moveForward);
 
         //ここからジャンプ
         isGrounded = CheckGroundStatus();
@@ -108,9 +112,11 @@ public class Player : MonoBehaviour
         }
 
         //確認
+        //Debug.Log(moveForward);
         //Debug.Log(isGrounded);
-        //Debug.Log(this.state);
+        Debug.Log(this.state);
 
+        //スフィアキャストの確認用
         //var start = transform.position + groundCheckOffsetY * Vector3.up;
         //var end = transform.position + groundCheckOffsetY * Vector3.up + groundCheckDistance * Vector3.down;
         //Debug.DrawLine(start, end, Color.red);
@@ -141,8 +147,6 @@ public class Player : MonoBehaviour
         StateMove();
         //無敵状態
         Muteki();
-        //変身
-        Copy();
     }
 
     private void StateThink()
@@ -152,18 +156,18 @@ public class Player : MonoBehaviour
             case State.Idle:
                 if (isGrounded && moveForward.magnitude > 0) { this.state = State.Move; }
                 if (jumping) { this.state = State.Jump; }
-                //攻撃への遷移
+                if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
                 //ダメージへの遷移
                 break;
             case State.Move:
                 if (moveForward.magnitude <= 0) { this.state = State.Idle; }
                 if (jumping) { this.state = State.Jump; }
-                //攻撃への遷移
+                if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
                 //ダメージへの遷移
                 break;
             case State.Jump:
                 if (isGrounded) { this.state = State.Idle; }
-                //攻撃への遷移
+                if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
                 //ダメージへの遷移
                 break;
 
@@ -224,26 +228,22 @@ public class Player : MonoBehaviour
         {
             return;
         }
-
         rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
-
         // ジャンプの速度をアニメーションカーブから取得
         float t = jumpTime / maxJumpTime;
         float power = jumpPower * jumpCurve.Evaluate(t);
-
         if (t >= 1)
         {
             jumping = false;
             jumpTime = 0;
         }
-
         rb.AddForce(power * Vector3.up, ForceMode.Impulse);
     }
 
     void Attack()
     {
-        attackRange.SetActive(true);
         attackCnt += Time.deltaTime;
+        action.Action(null,animator,attackCnt);
     }
 
     void Damage()
@@ -282,6 +282,12 @@ public class Player : MonoBehaviour
 
     private void Copy()
     {
+        if(action != null)
+        {
+            Destroy(action);
+            action = null;
+        }
+
         if (catFlag)
         {
             characters[0].SetActive(true);
@@ -289,6 +295,7 @@ public class Player : MonoBehaviour
             characters[2].SetActive(false);
             characters[3].SetActive(false);
             animator = characters[0].GetComponent<Animator>();
+            action = gameObject.AddComponent<PlayerUniqueActionCat>();
         }
         if (duckFlag)
         {
@@ -297,6 +304,7 @@ public class Player : MonoBehaviour
             characters[2].SetActive(false);
             characters[3].SetActive(false);
             animator = characters[1].GetComponent<Animator>();
+            action = gameObject.AddComponent<PlayerUniqueActionDuck>();
         }
         if (penguinFlag)
         {
@@ -305,6 +313,7 @@ public class Player : MonoBehaviour
             characters[2].SetActive(true);
             characters[3].SetActive(false);
             animator = characters[2].GetComponent<Animator>();
+            action = gameObject.AddComponent<PlayerUniqueActionPenguin>();
         }
         if (sheepFlag)
         {
@@ -313,8 +322,10 @@ public class Player : MonoBehaviour
             characters[2].SetActive(false);
             characters[3].SetActive(true);
             animator = characters[3].GetComponent<Animator>();
+            action = gameObject.AddComponent<PlayerUniqueActionSheep>();
         }
     }
+
     bool CheckGroundStatus()
     {
         bool isHit = false;
@@ -339,7 +350,7 @@ public class Player : MonoBehaviour
 
         Gizmos.color = new Color(1, 0, 0, 0.5f);
         float radius = Mathf.Max(0.01f, groundCheckRadius);
-        for(float y = start.y; y >= end.y; y -= radius)
+        for (float y = start.y; y >= end.y; y -= radius)
         {
             Gizmos.DrawSphere(new Vector3(start.x, y, start.z), groundCheckRadius);
             //Debug.Log("gizmo y:" + y);
@@ -368,17 +379,20 @@ public class Player : MonoBehaviour
 
         if (other.gameObject == copyItem[0])
         {
+            //変身
             catFlag = true;
             duckFlag = false;
             penguinFlag = false;
             sheepFlag = false;
-        }    
-        if(other.gameObject == copyItem[1])
+            Copy();
+        }
+        if (other.gameObject == copyItem[1])
         {
             catFlag = false;
             duckFlag = true;
             penguinFlag = false;
             sheepFlag = false;
+            Copy();
         }
         if (other.gameObject == copyItem[2])
         {
@@ -386,6 +400,7 @@ public class Player : MonoBehaviour
             duckFlag = false;
             penguinFlag = true;
             sheepFlag = false;
+            Copy();
         }
         if (other.gameObject == copyItem[3])
         {
@@ -393,6 +408,7 @@ public class Player : MonoBehaviour
             duckFlag = false;
             penguinFlag = false;
             sheepFlag = true;
+            Copy();
         }
     }
 }
