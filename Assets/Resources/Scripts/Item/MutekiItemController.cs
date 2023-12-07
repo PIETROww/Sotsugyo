@@ -6,7 +6,7 @@ using static UnityEditor.PlayerSettings;
 
 public class MutekiItemController : MonoBehaviour
 {
-    //[SerializeField] private ParticleSystem particle;
+    [SerializeField] private ParticleSystem particle;
     public float pos;
     private float time;
     private bool get = false;
@@ -50,6 +50,10 @@ public class MutekiItemController : MonoBehaviour
         {
             if (get == false)
             {
+                ParticleSystem newParticle = Instantiate(particle);
+                newParticle.transform.position = this.transform.position;
+                newParticle.Play();
+
                 bc.enabled = false;
                 get = true;
             }
