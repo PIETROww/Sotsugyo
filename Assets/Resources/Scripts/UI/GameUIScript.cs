@@ -16,6 +16,7 @@ public class GameUIScript : MonoBehaviour
     [SerializeField] private GameObject MenuPanel;
 
     [SerializeField] private Button ReturnButton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +24,18 @@ public class GameUIScript : MonoBehaviour
         sousaUI.SetActive(false);
         MenuPanel.SetActive(false);
     }
+    
+    //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    //////////////////////////////////////////////////
+    //                                              //
+    // 　　　　　以下各種Onclickメソッド設定　　 　　  //
+    //                                           　 //
+    //////////////////////////////////////////////////
 
+    //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
+    //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     public void MenuUI()
     {
         Menu.SetActive(true);

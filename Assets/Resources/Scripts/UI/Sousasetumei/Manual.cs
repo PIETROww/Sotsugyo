@@ -10,6 +10,7 @@ public class Manual : MonoBehaviour
     [SerializeField] private int count = 0;
     private
         int pre;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,15 +27,14 @@ public class Manual : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Gamepad.current.buttonEast.wasPressedThisFrame)
-        {
-            pre++;
-        }
-        else if (Gamepad.current.buttonWest.wasPressedThisFrame)
+        if (Gamepad.current.dpad.left.wasReleasedThisFrame)
         {
             pre--;
         }
-
+        else if (Gamepad.current.dpad.right.wasReleasedThisFrame)
+        {
+            pre++;
+        }
         // ÉãÅ[ÉvÇ∑ÇÈÇÊÇ§Ç…í≤êÆ
         pre = (pre + Panel.Length) % Panel.Length;
 
