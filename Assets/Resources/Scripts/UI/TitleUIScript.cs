@@ -34,7 +34,7 @@ public class TitleUIScript : MonoBehaviour
     [SerializeField] private GameObject SoundPanel;
     [SerializeField] private GameObject TutorialPanel;
 
-
+  
     void Start()
     {
         gameManager = GameManager.instance;
@@ -61,6 +61,14 @@ public class TitleUIScript : MonoBehaviour
             if (selectedButton != null)
             {
                 selectedButton.onClick.Invoke();
+            }
+        }
+
+        if (TutorialPanel==true)
+        {
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+            {
+                TutorialPanel.gameObject.SetActive(false);
             }
         }
     }

@@ -26,4 +26,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Hozumi2.unity
     guid: de574d381180bde4d986d8ae9a662435
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: ca9c47b880f94ff4587d2c6ab2e8d3df, type: 2}
