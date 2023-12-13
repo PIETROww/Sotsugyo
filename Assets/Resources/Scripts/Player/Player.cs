@@ -20,8 +20,10 @@ public class Player : MonoBehaviour
     private Vector3 moveForward;
 
     [SerializeField] private Animator animator;
-    public GameObject penguinAttack;
-    public GameObject catAttack;
+    private GameObject attackObj;
+    public GameObject penguinAttackObj;
+    public GameObject catAttackObj;
+    public GameObject sheepAttackObj;
 
     //ステータス--------------------------
     public int HP = 5;
@@ -167,7 +169,15 @@ public class Player : MonoBehaviour
                 break;
             case State.Jump:
                 if (isGrounded) { this.state = State.Idle; }
-                if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
+                if (Input.GetKeyDown(KeyCode.N))
+                {                     
+                    //if(action is PlayerUniqueActionPenguin actionPenguin)
+                    //{
+                    //    actionPenguin.oneShot = false;
+                    //}
+                    this.state = State.Attack;
+
+                }
                 //ダメージへの遷移
                 break;
 
@@ -243,7 +253,7 @@ public class Player : MonoBehaviour
     void Attack()
     {
         attackCnt += Time.deltaTime;
-        action.Action(null,animator,attackCnt);
+        action.Action(attackObj,animator,attackCnt);
     }
 
     void Damage()
@@ -295,6 +305,7 @@ public class Player : MonoBehaviour
             characters[2].SetActive(false);
             characters[3].SetActive(false);
             animator = characters[0].GetComponent<Animator>();
+            attackObj = catAttackObj;
             action = gameObject.AddComponent<PlayerUniqueActionCat>();
         }
         if (duckFlag)
@@ -304,6 +315,7 @@ public class Player : MonoBehaviour
             characters[2].SetActive(false);
             characters[3].SetActive(false);
             animator = characters[1].GetComponent<Animator>();
+
             action = gameObject.AddComponent<PlayerUniqueActionDuck>();
         }
         if (penguinFlag)
@@ -313,6 +325,7 @@ public class Player : MonoBehaviour
             characters[2].SetActive(true);
             characters[3].SetActive(false);
             animator = characters[2].GetComponent<Animator>();
+            attackObj = penguinAttackObj;
             action = gameObject.AddComponent<PlayerUniqueActionPenguin>();
         }
         if (sheepFlag)
@@ -322,6 +335,7 @@ public class Player : MonoBehaviour
             characters[2].SetActive(false);
             characters[3].SetActive(true);
             animator = characters[3].GetComponent<Animator>();
+            attackObj= sheepAttackObj;
             action = gameObject.AddComponent<PlayerUniqueActionSheep>();
         }
     }

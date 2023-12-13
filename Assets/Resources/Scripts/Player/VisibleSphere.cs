@@ -2,24 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Visible : MonoBehaviour
+public class VisibleSphere : MonoBehaviour
 {
-    public CapsuleCollider collider;
+    public SphereCollider sphereCollider;
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        sphereCollider = GetComponent<SphereCollider>();
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, collider.radius);
+        Gizmos.DrawWireSphere(transform.position, sphereCollider.radius);
     }
 }
