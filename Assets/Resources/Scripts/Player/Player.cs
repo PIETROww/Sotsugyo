@@ -58,6 +58,7 @@ public class Player : MonoBehaviour
     public GameObject attackRange;
     public float attackTime = 1.0f;
     private float attackCnt = 0.0f;
+    private bool attackFlag = true;
 
     //ƒ_ƒ[ƒW‚ğó‚¯‚½‚Æ‚«‚Ìˆ—----------
     public float damageTime = 2.0f;
@@ -170,7 +171,7 @@ public class Player : MonoBehaviour
             case State.Jump:
                 if (isGrounded) { this.state = State.Idle; }
                 if (Input.GetKeyDown(KeyCode.N))
-                {                     
+                {
                     //if(action is PlayerUniqueActionPenguin actionPenguin)
                     //{
                     //    actionPenguin.oneShot = false;
@@ -185,6 +186,7 @@ public class Player : MonoBehaviour
                 if (attackTime <= attackCnt)
                 {
                     attackCnt = 0.0f;
+                    attackFlag = true;
                     this.state = State.Idle;
                 }
                 break;
@@ -216,10 +218,17 @@ public class Player : MonoBehaviour
                 Jump();
                 break;
             case State.Attack:
-                Attack();
+                Move();         //“®‚«‚È‚ª‚çUŒ‚‚Å‚«‚é‚æ‚¤‚É‚·‚é
+                attackCnt += Time.deltaTime;
+                if (attackFlag && 0.5f <= attackCnt)
+                {
+                    Attack();
+                    attackFlag = false;
+                }
                 break;
             case State.Damage:
                 animator.SetTrigger("stun");
+                damageCnt += Time.deltaTime;
                 Damage();
                 break;
             case State.Dead:
@@ -252,20 +261,18 @@ public class Player : MonoBehaviour
 
     void Attack()
     {
-        attackCnt += Time.deltaTime;
-        action.Action(attackObj,animator,attackCnt);
+        action.Action(attackObj, animator, attackCnt);
     }
 
     void Damage()
     {
-        damageCnt += Time.deltaTime;
+
     }
 
     void Dead()
     {
 
     }
-
 
     private void Muteki()
     {
@@ -292,7 +299,7 @@ public class Player : MonoBehaviour
 
     private void Copy()
     {
-        if(action != null)
+        if (action != null)
         {
             Destroy(action);
             action = null;
@@ -335,7 +342,7 @@ public class Player : MonoBehaviour
             characters[2].SetActive(false);
             characters[3].SetActive(true);
             animator = characters[3].GetComponent<Animator>();
-            attackObj= sheepAttackObj;
+            attackObj = sheepAttackObj;
             action = gameObject.AddComponent<PlayerUniqueActionSheep>();
         }
     }

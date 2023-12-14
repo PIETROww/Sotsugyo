@@ -12,12 +12,8 @@ public class PlayerUniqueActionCat : PlayerUniqueAction
 {
     public override void Action(GameObject attackObj, Animator anim, float attackCnt)
     {
-        if (0.2f <= attackCnt)
-        {
-            //‚Ð‚Á‚©‚«UŒ‚
-            attackObj.SetActive(true);
-        }
-        //attackObj.SetActive(false);
+        //‚Ð‚Á‚©‚«UŒ‚
+        attackObj.SetActive(true);
     }
 }
 
@@ -48,9 +44,6 @@ public class PlayerUniqueActionSheep : PlayerUniqueAction
 {
     public override void Action(GameObject attackObj, Animator anim, float attackCnt)
     {
-        if (0.4f <= attackCnt)
-        {
-            attackObj.SetActive(true);
-        }
+        attackObj.SetActive(true);
     }
 }
