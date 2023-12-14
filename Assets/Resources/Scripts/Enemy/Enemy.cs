@@ -1,10 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
+    enum State
+    {
+        Idle,
+        Capture,
+        Attack,
+        Damage,
+        Dead,
+    }
+    State state;
+
     public Transform Target;
     public Transform random;
     NavMeshAgent agent;
@@ -20,13 +28,48 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (sensor == false)
+        //if (sensor == false)
+        //{
+        //    agent.destination = random.transform.position;
+        //}
+        //else
+        //{
+        //    agent.destination = Target.transform.position;
+        //}
+
+        State_Think();
+        State_Move();
+    }
+
+    void State_Think()
+    {
+        switch (state)
         {
-            agent.destination = random.transform.position;
+            case State.Idle:
+                if (sensor) { state = State.Capture; }
+                break;
+            case State.Capture:
+                if (!sensor) { state = State.Idle; }
+                break;
+            case State.Attack:
+                break;
+            case State.Damage:
+                break;
+            case State.Dead:
+                break;
         }
-        else
+    }
+
+    void State_Move()
+    {
+        switch (state)
         {
-            agent.destination = Target.transform.position;
+            case State.Idle:
+                Idle();
+                break;
+            case State.Capture:
+                Capture();
+                break;
         }
     }
 
@@ -40,11 +83,21 @@ public class Enemy : MonoBehaviour
         sensor = false;
     }
 
+    private void Idle()
+    {
+        agent.destination = random.transform.position;
+    }
+
+    private void Capture()
+    {
+        agent.destination = Target.transform.position;
+    }
+
     private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.tag == "Player")
         {
-            
+
         }
     }
 }
