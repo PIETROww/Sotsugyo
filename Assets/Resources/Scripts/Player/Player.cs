@@ -13,16 +13,17 @@ public class Player : MonoBehaviour
     }
     private State state;
 
-    private PlayerUniqueAction action = null;
+    private CharaUniqueAction uniqueAction = null;
 
     private float inputX, inputZ;
     private Rigidbody rb;
     private Vector3 moveForward;
 
     [SerializeField] private Animator animator;
-    private GameObject attackObj;
-    public GameObject penguinAttackObj;
+    private GameObject attackObj;    
     public GameObject catAttackObj;
+    public GameObject duckAttackObj;
+    public GameObject penguinAttackObj;
     public GameObject sheepAttackObj;
 
     //ÉXÉeÅ[É^ÉX--------------------------
@@ -55,7 +56,7 @@ public class Player : MonoBehaviour
     private Transform tr;
 
     //çUåÇ--------------------------------
-    public GameObject attackRange;
+    //public GameObject attackRange;
     public float attackTime = 1.0f;
     private float attackCnt = 0.0f;
     private bool attackFlag = true;
@@ -82,7 +83,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tr = this.transform;
 
-        Copy();
+        Copy(ref uniqueAction, ref characters, ref animator, ref attackObj);
     }
 
     // Update is called once per frame
@@ -261,7 +262,7 @@ public class Player : MonoBehaviour
 
     void Attack()
     {
-        action.Action(attackObj, animator, attackCnt);
+        uniqueAction.Action(attackObj, animator, attackCnt);
     }
 
     void Damage()
@@ -297,12 +298,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Copy()
+    public void Copy(ref CharaUniqueAction uniqueAction, ref GameObject[] chracters,ref Animator animator,ref GameObject attackObj)
     {
-        if (action != null)
+        
+        if (uniqueAction != null)
         {
-            Destroy(action);
-            action = null;
+            Destroy(uniqueAction);  //àÍìxî\óÕÇè¡ãé
+            uniqueAction = null;    //nullÇì¸ÇÍÇÈ
         }
 
         if (catFlag)
@@ -313,7 +315,7 @@ public class Player : MonoBehaviour
             characters[3].SetActive(false);
             animator = characters[0].GetComponent<Animator>();
             attackObj = catAttackObj;
-            action = gameObject.AddComponent<PlayerUniqueActionCat>();
+            uniqueAction = gameObject.AddComponent<CharaUniqueActionCat>();
         }
         if (duckFlag)
         {
@@ -323,7 +325,7 @@ public class Player : MonoBehaviour
             characters[3].SetActive(false);
             animator = characters[1].GetComponent<Animator>();
 
-            action = gameObject.AddComponent<PlayerUniqueActionDuck>();
+            uniqueAction = gameObject.AddComponent<CharaUniqueActionDuck>();
         }
         if (penguinFlag)
         {
@@ -333,7 +335,7 @@ public class Player : MonoBehaviour
             characters[3].SetActive(false);
             animator = characters[2].GetComponent<Animator>();
             attackObj = penguinAttackObj;
-            action = gameObject.AddComponent<PlayerUniqueActionPenguin>();
+            uniqueAction = gameObject.AddComponent<CharaUniqueActionPenguin>();
         }
         if (sheepFlag)
         {
@@ -343,7 +345,7 @@ public class Player : MonoBehaviour
             characters[3].SetActive(true);
             animator = characters[3].GetComponent<Animator>();
             attackObj = sheepAttackObj;
-            action = gameObject.AddComponent<PlayerUniqueActionSheep>();
+            uniqueAction = gameObject.AddComponent<CharaUniqueActionSheep>();
         }
     }
 
@@ -390,11 +392,11 @@ public class Player : MonoBehaviour
 
         if (other.gameObject.tag == "Enemy")
         {
-            //ñ≥ìGÇÃéûÇÕÅAìGÇì|Ç∑
-            if (mutekiFlag)
-                Destroy(other.gameObject);
-            //ñ≥ìGÇ≈Ç»Ç¢éûÇÕÅAÉ_ÉÅÅ[ÉWÇéÛÇØÇÈ
-            else
+            ////ñ≥ìGÇÃéûÇÕÅAìGÇì|Ç∑
+            //if (mutekiFlag)
+            //    Destroy(other.gameObject);    //ìGë§Ç≈Ç‚ÇÈÇ±Ç∆Ç…ÇµÇΩ
+            ////ñ≥ìGÇ≈Ç»Ç¢éûÇÕÅAÉ_ÉÅÅ[ÉWÇéÛÇØÇÈ
+            //else
                 HP -= 1;
         }
 
@@ -405,7 +407,7 @@ public class Player : MonoBehaviour
             duckFlag = false;
             penguinFlag = false;
             sheepFlag = false;
-            Copy();
+            Copy(ref uniqueAction,ref characters,ref animator,ref attackObj);
         }
         if (other.gameObject == copyItem[1])
         {
@@ -413,7 +415,7 @@ public class Player : MonoBehaviour
             duckFlag = true;
             penguinFlag = false;
             sheepFlag = false;
-            Copy();
+            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj);
         }
         if (other.gameObject == copyItem[2])
         {
@@ -421,7 +423,7 @@ public class Player : MonoBehaviour
             duckFlag = false;
             penguinFlag = true;
             sheepFlag = false;
-            Copy();
+            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj);
         }
         if (other.gameObject == copyItem[3])
         {
@@ -429,7 +431,7 @@ public class Player : MonoBehaviour
             duckFlag = false;
             penguinFlag = false;
             sheepFlag = true;
-            Copy();
+            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj);
         }
     }
 }
