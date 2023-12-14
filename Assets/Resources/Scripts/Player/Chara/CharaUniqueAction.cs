@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerUniqueAction : MonoBehaviour
+public class CharaUniqueAction : MonoBehaviour
 {
     public virtual void Action(GameObject attackObj, Animator anim, float attackCnt)    //virtualÅFâºëzä÷êî
     {
@@ -8,7 +8,7 @@ public class PlayerUniqueAction : MonoBehaviour
     }
 }
 
-public class PlayerUniqueActionCat : PlayerUniqueAction
+public class CharaUniqueActionCat : CharaUniqueAction
 {
     public override void Action(GameObject attackObj, Animator anim, float attackCnt)
     {
@@ -17,7 +17,7 @@ public class PlayerUniqueActionCat : PlayerUniqueAction
     }
 }
 
-public class PlayerUniqueActionDuck : PlayerUniqueAction
+public class CharaUniqueActionDuck : CharaUniqueAction
 {
     public override void Action(GameObject attackObj, Animator anim, float attackCnt)
     {
@@ -25,7 +25,7 @@ public class PlayerUniqueActionDuck : PlayerUniqueAction
     }
 }
 
-public class PlayerUniqueActionPenguin : PlayerUniqueAction
+public class CharaUniqueActionPenguin : CharaUniqueAction
 {
     //public bool oneShot = false;
     public override void Action(GameObject attackObj, Animator anim, float attackCnt)
@@ -40,7 +40,7 @@ public class PlayerUniqueActionPenguin : PlayerUniqueAction
     }
 }
 
-public class PlayerUniqueActionSheep : PlayerUniqueAction
+public class CharaUniqueActionSheep : CharaUniqueAction
 {
     public override void Action(GameObject attackObj, Animator anim, float attackCnt)
     {

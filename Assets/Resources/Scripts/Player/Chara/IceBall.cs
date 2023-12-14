@@ -28,6 +28,6 @@ public class IceBall : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.position += transform.forward;
+        transform.position += transform.forward*Time.deltaTime;
     }
 }
