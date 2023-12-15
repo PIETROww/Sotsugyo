@@ -13,6 +13,8 @@ public class TitleUIScript : MonoBehaviour
 {
     private GameManager gameManager;
     private GameUIScript gameUI;
+    private TutorialManager tutorialM;
+
     private Animator animator;
     private EventSystem eventSystem;
 
@@ -39,6 +41,7 @@ public class TitleUIScript : MonoBehaviour
     {
         gameManager = GameManager.instance;
         gameUI=GetComponent<GameUIScript>();
+        tutorialM=GetComponent<TutorialManager>();
         animator = gameObject.GetComponent<Animator>();
         eventSystem = EventSystem.current;
 
@@ -113,6 +116,7 @@ public class TitleUIScript : MonoBehaviour
     public void TutorialButtonDown()
     {
         TutorialPanel.gameObject.SetActive(true);
+        tutorialM.SwitchEnabled();
     }
 
     public void SoundButtonDown()

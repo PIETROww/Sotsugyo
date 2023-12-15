@@ -45,6 +45,12 @@ public class TutorialManager : MonoBehaviour
         isEnabled = true;
     }
 
+    private void Start()
+    {
+        StartCoroutine(SetCurrentTask(tutorialTask.First()));
+        isEnabled = true;
+    }
+
     void Update()
     {
         // チュートリアルが存在し実行されていない場合に処理
@@ -100,12 +106,27 @@ public class TutorialManager : MonoBehaviour
     }
 
     //チュートリアルの有効無効切り替え
-    protected void SwitchEnabled()
+    public void SwitchEnabled()
     {
-        isEnabled = !isEnabled;
 
-        // UIの表示切り替え
-        float alpha = isEnabled ? 1f : 0;
-        TutorialTextArea.GetComponent<CanvasGroup>().alpha = alpha;
+        isEnabled = !isEnabled;
+        Debug.Log("SwitchEnabled - isEnabled: " + isEnabled);
+        if (isEnabled)
+        {
+            // UIを表示する処理
+            float alpha = 1f;
+            TutorialTextArea.GetComponent<CanvasGroup>().alpha = alpha;
+            TutorialTextArea.gameObject.SetActive(true);
+            TutorialTextArea.GetComponent<CanvasGroup>().blocksRaycasts = true;
+        }
+        else
+        {
+            // UIを非表示にする処理
+            float alpha = 0;
+            TutorialTextArea.GetComponent<CanvasGroup>().alpha = alpha;
+            TutorialTextArea.gameObject.SetActive(false);
+            TutorialTextArea.GetComponent<CanvasGroup>().blocksRaycasts = false;
+            //currentTask = null;
+        }
     }
 }
