@@ -21,7 +21,7 @@ public class HealItemController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3(transform.position.x, pos + Mathf.PingPong(Time.time, 3.0f), transform.position.z);
+        this.transform.position = new Vector3(transform.position.x, pos + Mathf.PingPong(Time.time, 2.0f), transform.position.z);
         this.transform.Rotate(0.0f, 1.0f, 0.0f, Space.World);
 
         //アイテムをゲットしたとき
@@ -36,6 +36,10 @@ public class HealItemController : MonoBehaviour
             //一定時間後消滅させる
             if (time > 0.5f)
             {
+                ParticleSystem newParticle = Instantiate(particle);
+                newParticle.transform.position = this.transform.position;
+                newParticle.Play();
+
                 Destroy(this.gameObject);
             }
         }
@@ -48,10 +52,6 @@ public class HealItemController : MonoBehaviour
         {
             if (get == false)
             {
-                ParticleSystem newParticle = Instantiate(particle);
-                newParticle.transform.position = this.transform.position;
-                newParticle.Play();
-
                 bc.enabled = false;
                 get = true;
             }

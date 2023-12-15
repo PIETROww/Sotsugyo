@@ -7,6 +7,7 @@ public class KibakoController : MonoBehaviour
 {
     public GameObject itemPrefab;
     [SerializeField] private ParticleSystem particle;
+
     // Start is called before the first frame update
     void Start()
     {
