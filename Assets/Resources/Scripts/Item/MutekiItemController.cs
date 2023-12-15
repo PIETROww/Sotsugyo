@@ -37,6 +37,10 @@ public class MutekiItemController : MonoBehaviour
             //ˆê’èŽžŠÔŒãÁ–Å‚³‚¹‚é
             if (time > 0.5f)
             {
+                ParticleSystem newParticle = Instantiate(particle);
+                newParticle.transform.position = this.transform.position;
+                newParticle.Play();
+
                 Destroy(this.gameObject);
             }
         }
@@ -49,10 +53,6 @@ public class MutekiItemController : MonoBehaviour
         {
             if (get == false)
             {
-                ParticleSystem newParticle = Instantiate(particle);
-                newParticle.transform.position = this.transform.position;
-                newParticle.Play();
-
                 bc.enabled = false;
                 get = true;
             }
