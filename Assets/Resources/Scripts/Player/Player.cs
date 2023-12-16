@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     private Vector3 moveForward;
 
     [SerializeField] private Animator animator;
-    private GameObject attackObj;    
+    private GameObject attackObj;
     public GameObject catAttackObj;
     public GameObject duckAttackObj;
     public GameObject penguinAttackObj;
@@ -83,7 +83,8 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tr = this.transform;
 
-        Copy(ref uniqueAction, ref characters, ref animator, ref attackObj);
+        Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
+            catFlag, duckFlag, penguinFlag, sheepFlag);
     }
 
     // Update is called once per frame
@@ -118,7 +119,7 @@ public class Player : MonoBehaviour
         //確認
         //Debug.Log(moveForward);
         //Debug.Log(isGrounded);
-        Debug.Log(this.state);
+        //Debug.Log(this.state);
 
         //スフィアキャストの確認用
         //var start = transform.position + groundCheckOffsetY * Vector3.up;
@@ -298,9 +299,21 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Copy(ref CharaUniqueAction uniqueAction, ref GameObject[] chracters,ref Animator animator,ref GameObject attackObj)
+    void Falling()
     {
-        
+        if (transform.position.y <= -10)
+        {
+            //カメラを先にチェックポイント付近に移動させる
+
+            //チェックポイントにワープする
+        }
+    }
+
+    //変身
+    public void Copy(ref CharaUniqueAction uniqueAction, ref GameObject[] characters, ref Animator animator, ref GameObject attackObj,
+        bool catFlag, bool duckFlag, bool penguinFlag, bool sheepFlag)  //引数多すぎ
+    {
+
         if (uniqueAction != null)
         {
             Destroy(uniqueAction);  //一度能力を消去
@@ -324,7 +337,7 @@ public class Player : MonoBehaviour
             characters[2].SetActive(false);
             characters[3].SetActive(false);
             animator = characters[1].GetComponent<Animator>();
-
+            attackObj = duckAttackObj;
             uniqueAction = gameObject.AddComponent<CharaUniqueActionDuck>();
         }
         if (penguinFlag)
@@ -366,6 +379,8 @@ public class Player : MonoBehaviour
         }
         return isHit;
     }
+
+    //着地処理を可視化するための処理
     private void OnDrawGizmos()
     {
         var start = transform.position + groundCheckOffsetY * Vector3.up;
@@ -397,17 +412,18 @@ public class Player : MonoBehaviour
             //    Destroy(other.gameObject);    //敵側でやることにした
             ////無敵でない時は、ダメージを受ける
             //else
-                HP -= 1;
+            HP -= 1;
         }
 
+        //変身のフラグを設定＋変身する
         if (other.gameObject == copyItem[0])
         {
-            //変身
             catFlag = true;
             duckFlag = false;
             penguinFlag = false;
             sheepFlag = false;
-            Copy(ref uniqueAction,ref characters,ref animator,ref attackObj);
+            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
+                catFlag, duckFlag, penguinFlag, sheepFlag);
         }
         if (other.gameObject == copyItem[1])
         {
@@ -415,7 +431,8 @@ public class Player : MonoBehaviour
             duckFlag = true;
             penguinFlag = false;
             sheepFlag = false;
-            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj);
+            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
+                catFlag, duckFlag, penguinFlag, sheepFlag);
         }
         if (other.gameObject == copyItem[2])
         {
@@ -423,7 +440,8 @@ public class Player : MonoBehaviour
             duckFlag = false;
             penguinFlag = true;
             sheepFlag = false;
-            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj);
+            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
+                catFlag, duckFlag, penguinFlag, sheepFlag);
         }
         if (other.gameObject == copyItem[3])
         {
@@ -431,7 +449,8 @@ public class Player : MonoBehaviour
             duckFlag = false;
             penguinFlag = false;
             sheepFlag = true;
-            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj);
+            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
+                catFlag, duckFlag, penguinFlag, sheepFlag);
         }
     }
 }

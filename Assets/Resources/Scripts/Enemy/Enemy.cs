@@ -35,16 +35,18 @@ public class Enemy : MonoBehaviour
 
     //攻撃
     public float attackTime = 1.0f;    //攻撃の所要時間　アニメーションによって変えるつもり
-    float attackCnt;
+    float attackCnt = 0.0f;
+    bool attackFlag = true;
     CharaUniqueAction uniqueAction;
 
     //キャラ分け--------------------------------
-    public int charaNum = 0;
+    public int charaNum = 0;        //キャラクターを決定する値
     public GameObject[] characters;
-    bool catFlag = false,
-        duckFlag = false,
-        penguinFlag = false,
-        sheepFlag = false;
+    bool catFlag = false,           //0
+        duckFlag = false,           //1
+        penguinFlag = false,        //2
+        sheepFlag = false,          //3
+        zakoFlag = false;           //4
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +55,8 @@ public class Enemy : MonoBehaviour
         player = GameObject.Find("Player");
 
         CharaSelect();
+        //player.GetComponent<Player>().Copy(ref this.uniqueAction, ref this.characters, ref this.animator, ref this.attackObj,
+        //    catFlag, duckFlag, penguinFlag, sheepFlag);
     }
 
     // Update is called once per frame
@@ -70,8 +74,6 @@ public class Enemy : MonoBehaviour
         State_Think();
         State_Move();
 
-        player.GetComponent<Player>().Copy(ref this.uniqueAction, ref this.characters, ref this.animator, ref this.attackObj);
-
         //確認用
         Debug.Log(attackSensor);
     }
@@ -85,8 +87,19 @@ public class Enemy : MonoBehaviour
                 break;
             case State.Capture:
                 if (!sensor) { state = State.Idle; }
+                if (attackSensor) { state = State.Attack; }
                 break;
             case State.Attack:
+                if (!attackSensor)
+                {
+                    if (attackTime <= attackCnt)
+                    {
+                        attackCnt = 0.0f;
+                        attackFlag = true;
+                        this.state = State.Idle;
+                    }
+                }
+
                 break;
             case State.Damage:
                 break;
@@ -100,10 +113,24 @@ public class Enemy : MonoBehaviour
         switch (state)
         {
             case State.Idle:
+                animator.SetTrigger("Idle");
                 Idle();
                 break;
             case State.Capture:
+                animator.SetTrigger("Walk");
                 Capture();
+                break;
+            case State.Attack:
+                if (attackFlag && 0.5f <= attackCnt)
+                {
+                    Attack();
+                    attackFlag = false;
+                }
+                break;
+                case State.Damage:
+                animator.SetTrigger("stun");
+                break;
+                case State.Dead:
                 break;
         }
     }
@@ -151,6 +178,16 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    void Damage()
+    {
+        //ヒットストップとかあったらbetter
+        //後ろに跳ねる
+    }
+    void Dead()
+    {
+        //変身アイテムを生成
+    }
+
     void CharaSelect()
     {
         switch (charaNum)
@@ -160,7 +197,8 @@ public class Enemy : MonoBehaviour
                 duckFlag = false;
                 penguinFlag = false;
                 sheepFlag = false;
-                player.GetComponent<Player>().Copy(ref this.uniqueAction, ref this.characters, ref this.animator, ref this.attackObj);
+                player.GetComponent<Player>().Copy(ref this.uniqueAction, ref this.characters, ref this.animator, ref this.attackObj,
+                     catFlag, duckFlag, penguinFlag, sheepFlag);
                 break;
 
             case 1:
@@ -168,7 +206,8 @@ public class Enemy : MonoBehaviour
                 duckFlag = true;
                 penguinFlag = false;
                 sheepFlag = false;
-                player.GetComponent<Player>().Copy(ref this.uniqueAction, ref this.characters, ref this.animator, ref this.attackObj);
+                player.GetComponent<Player>().Copy(ref this.uniqueAction, ref this.characters, ref this.animator, ref this.attackObj,
+                    catFlag, duckFlag, penguinFlag, sheepFlag);
                 break;
 
             case 2:
@@ -176,7 +215,8 @@ public class Enemy : MonoBehaviour
                 duckFlag = false;
                 penguinFlag = true;
                 sheepFlag = false;
-                player.GetComponent<Player>().Copy(ref this.uniqueAction, ref this.characters, ref this.animator, ref this.attackObj);
+                player.GetComponent<Player>().Copy(ref this.uniqueAction, ref this.characters, ref this.animator, ref this.attackObj,
+                    catFlag, duckFlag, penguinFlag, sheepFlag);
                 break;
 
             case 3:
@@ -184,8 +224,22 @@ public class Enemy : MonoBehaviour
                 duckFlag = false;
                 penguinFlag = false;
                 sheepFlag = true;
-                player.GetComponent<Player>().Copy(ref this.uniqueAction, ref this.characters, ref this.animator, ref this.attackObj);
+                player.GetComponent<Player>().Copy(ref this.uniqueAction, ref this.characters, ref this.animator, ref this.attackObj,
+                    catFlag, duckFlag, penguinFlag, sheepFlag);
+                break;
+            case 4:
+                catFlag = false;
+                duckFlag = false;
+                penguinFlag = false;
+                sheepFlag = false;
+                zakoFlag = true;
                 break;
         }
+    }
+
+    //値を制限するための関数
+    private void OnValidate()
+    {
+        charaNum = Mathf.Clamp(charaNum, 0, 4); //マジックナンバー
     }
 }

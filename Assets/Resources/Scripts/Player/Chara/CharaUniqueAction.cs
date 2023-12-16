@@ -21,7 +21,7 @@ public class CharaUniqueActionDuck : CharaUniqueAction
 {
     public override void Action(GameObject attackObj, Animator anim, float attackCnt)
     {
-
+        Instantiate(attackObj, this.gameObject.transform.position, Quaternion.identity);
     }
 }
 
