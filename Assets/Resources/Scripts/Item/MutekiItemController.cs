@@ -31,7 +31,7 @@ public class MutekiItemController : MonoBehaviour
             time += Time.deltaTime;
 
             //ゲットした時の回転速度変更
-            this.transform.position = new Vector3(transform.position.x, transform.position.y + time * 5.0f , transform.position.z);
+            this.transform.position = new Vector3(transform.position.x, transform.position.y + time * 3.0f , transform.position.z);
             this.transform.Rotate(0.0f, 15.0f, 0.0f, Space.World);
 
             //一定時間後消滅させる
