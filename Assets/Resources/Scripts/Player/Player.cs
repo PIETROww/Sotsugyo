@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -299,6 +300,14 @@ public class Player : MonoBehaviour
         }
     }
 
+    //スピードアップ
+    IEnumerator SpeedUp()
+    {
+        speed = 7.0f;
+        yield return new WaitForSeconds(10.0f);
+        speed = 5.0f;
+    }
+
     void Falling()
     {
         if (transform.position.y <= -10)
@@ -401,9 +410,25 @@ public class Player : MonoBehaviour
     public GameObject[] copyItem;
     private void OnCollisionEnter(Collision other)
     {
-        //ぶつかった対象が無敵アイテムのタグの場合
+        //ぶつかった対象が無敵アイテムの場合
         if (other.gameObject.tag == "MutekiItem")
             mutekiFlag = true;
+
+        //ぶつかった対象がスピードアップアイテムの場合
+        if (other.gameObject.tag == "SpeedupItem")
+            StartCoroutine("SpeedUp");
+
+        //ぶつかった対象が回復アイテムの場合
+        if (other.gameObject.tag == "HealItem")
+        {
+            HP += 1;
+
+            //HPが5以上回復しないようにする
+            if (HP > 5)
+            {
+                HP = 5;
+            }
+        }
 
         if (other.gameObject.tag == "Enemy")
         {
