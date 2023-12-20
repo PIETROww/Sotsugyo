@@ -12,12 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/ResultScene.unity
     guid: 4be46df3c2435b74a9ea2ed26adbae84
   - enabled: 1
+    path: Assets/Scenes/sagyou/runeResult.unity
+    guid: a75f8bf436f53af4ba6876dfbb3ac143
+  - enabled: 1
     path: Assets/Scenes/TitleScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/sagyou/rune.unity
     guid: 11d070ad1e2ee3446bc19a41fd4990ac
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/sagyou/runeGame.unity
     guid: bd6553e20faf0d64fb750845559b8ce5
   - enabled: 1
