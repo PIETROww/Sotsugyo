@@ -22,9 +22,9 @@ public class KibakoController : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         ParticleSystem newParticle = Instantiate(particle);
-        newParticle.transform.position = new Vector3(transform.position.x, transform.position.y + 5.0f, transform.position.z);
+        newParticle.transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
         newParticle.Play();
         Destroy(this.gameObject);
-        Instantiate(itemPrefab, new Vector3(transform.position.x, transform.position.y + 3.0f, transform.position.z), itemPrefab.transform.rotation);
+        Instantiate(itemPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), itemPrefab.transform.rotation);
     }
 }
