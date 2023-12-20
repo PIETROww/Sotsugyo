@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class HealItemController : MonoBehaviour
 {
-    [SerializeField] private ParticleSystem particle;
+    //[SerializeField] private ParticleSystem particle;
+    public GameObject effectPrefab;
     public float pos;
     private float time;
     private bool get = false;
@@ -21,8 +22,8 @@ public class HealItemController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.transform.position = new Vector3(transform.position.x, pos + Mathf.PingPong(Time.time, 2.0f), transform.position.z);
-        this.transform.Rotate(0.0f, 1.0f, 0.0f, Space.World);
+        this.transform.position = new Vector3(transform.position.x, pos + Mathf.PingPong(Time.time, 1.0f), transform.position.z);
+        this.transform.Rotate(0.0f, 3.0f, 0.0f, Space.World);
 
         //アイテムをゲットしたとき
         if (get == true)
@@ -30,16 +31,18 @@ public class HealItemController : MonoBehaviour
             time += Time.deltaTime;
 
             //ゲットした時の回転速度変更
-            this.transform.position = new Vector3(transform.position.x, transform.position.y + time * 5.0f, transform.position.z);
-            this.transform.Rotate(0.0f, 15.0f, 0.0f, Space.World);
+            this.transform.position = new Vector3(transform.position.x, transform.position.y + time * 4.0f, transform.position.z);
+            this.transform.Rotate(0.0f, 30.0f, 0.0f, Space.World);
 
             //一定時間後消滅させる
             if (time > 0.5f)
             {
-                ParticleSystem newParticle = Instantiate(particle);
-                newParticle.transform.position = this.transform.position;
-                newParticle.Play();
+                //ParticleSystem newParticle = Instantiate(particle);
+                //newParticle.transform.position = this.transform.position;
+                //newParticle.Play();
 
+                GameObject itemgetEffect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+                Destroy(itemgetEffect, 3.0f);
                 Destroy(this.gameObject);
             }
         }
