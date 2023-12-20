@@ -11,6 +11,14 @@ public class Switch2 : MonoBehaviour
 
     public Wall2 wall;
 
+    public AudioClip switchSE;
+    private AudioSource audioSource;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = switchSE;
+    }
     void Update()
     {
         if (active && transform.position.y > bottomY)
@@ -19,6 +27,7 @@ public class Switch2 : MonoBehaviour
 
             if (transform.position.y <= bottomY)
             {
+                audioSource.Play();
                 wall.isOpen1 = true;
                 enabled = false;
             }
