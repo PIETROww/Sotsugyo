@@ -20,7 +20,7 @@ public class DeadZone : MonoBehaviour
     {
         if(other.gameObject.tag=="Player")
         {
-           // Player.transform = StartPos;
+           tag=="Player".positionX
         }
     }
 }
