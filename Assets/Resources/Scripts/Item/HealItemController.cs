@@ -7,6 +7,7 @@ public class HealItemController : MonoBehaviour
 {
     //[SerializeField] private ParticleSystem particle;
     public GameObject effectPrefab;
+    //public GameObject effectPrefab1;
     public float pos;
     private float time;
     private bool get = false;
@@ -41,6 +42,8 @@ public class HealItemController : MonoBehaviour
                 //newParticle.transform.position = this.transform.position;
                 //newParticle.Play();
 
+                //GameObject playerEffect = Instantiate(effectPrefab1, transform.position, Quaternion.identity);
+                //Destroy(playerEffect, 3.0f);
                 GameObject itemgetEffect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
                 Destroy(itemgetEffect, 3.0f);
                 Destroy(this.gameObject);
