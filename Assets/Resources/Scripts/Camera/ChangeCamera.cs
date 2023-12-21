@@ -7,6 +7,8 @@ public class ChangeCamera : MonoBehaviour
 {
     private CinemachineVirtualCamera vCamera;
     private float time = 0;
+
+    public GameObject startLogo;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,8 +18,12 @@ public class ChangeCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time+= Time.deltaTime;
-        if(time>3)
+        //time+= Time.deltaTime;
+        //if(time>3)
+        //{
+        //    Change();
+        //}
+        if(!startLogo.activeSelf)
         {
             Change();
         }
