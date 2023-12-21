@@ -35,7 +35,7 @@ public class MutekiItemController : MonoBehaviour
 
             //ƒQƒbƒg‚µ‚½Žž‚Ì‰ñ“]‘¬“x•ÏX
             this.transform.position = new Vector3(transform.position.x, transform.position.y + time * 4.0f , transform.position.z);
-            this.transform.Rotate(0.0f, 30.0f, 0.0f, Space.World);
+            this.transform.Rotate(0.0f, 15.0f, 0.0f, Space.World);
 
             //ˆê’èŽžŠÔŒãÁ–Å‚³‚¹‚é
             if (time > 0.5f)
