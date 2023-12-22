@@ -24,7 +24,11 @@ public class GameUIScript : MonoBehaviour
         sousaUI.SetActive(false);
         MenuPanel.SetActive(false);
     }
-    
+
+    private void Update()
+    {
+        Debug.Log("TimeScale: " + Time.timeScale);
+    }
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
 
@@ -39,6 +43,15 @@ public class GameUIScript : MonoBehaviour
     public void MenuUI()
     {
         Menu.SetActive(true);
+        if(Time.timeScale == 1.0f)
+        {
+            Time.timeScale = 0.0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
+
         EventSystem.current.SetSelectedGameObject(MenuButton.gameObject);
     }
     public void MenuButtonDown()
