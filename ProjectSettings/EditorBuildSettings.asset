@@ -21,13 +21,16 @@ EditorBuildSettings:
     path: Assets/Scenes/sagyou/rune.unity
     guid: 11d070ad1e2ee3446bc19a41fd4990ac
   - enabled: 0
-    path: Assets/Scenes/sagyou/runeGame.unity
-    guid: bd6553e20faf0d64fb750845559b8ce5
-  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
+  - enabled: 1
     path: Assets/Scenes/Hozumi.unity
     guid: 6651ad4f7534e6e4ea337f8aa56f8896
   - enabled: 1
     path: Assets/Scenes/Hozumi2.unity
     guid: de574d381180bde4d986d8ae9a662435
+  - enabled: 1
+    path: Assets/Scenes/StageSelect.unity
+    guid: 8d8a80d4deed757479861ec0196fa07f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: ca9c47b880f94ff4587d2c6ab2e8d3df, type: 2}
