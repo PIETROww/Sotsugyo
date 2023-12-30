@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceFromSurface: 1
-  targetLayer:
+  groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  speed: 10

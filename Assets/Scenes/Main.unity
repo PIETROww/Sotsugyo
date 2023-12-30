@@ -4888,7 +4888,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   se1: {fileID: 8300000, guid: 3e15ed2387dbebe4280e91fa7de23738, type: 3}
-  clearImage: {fileID: 0}
+  clearImage: {fileID: 1397676648}
 --- !u!54 &649246483
 Rigidbody:
   m_ObjectHideFlags: 0
