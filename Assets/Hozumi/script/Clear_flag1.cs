@@ -39,6 +39,6 @@ public class Clear_flag1 : MonoBehaviour
     void SceneLoad()
     {
         clearImage.enabled = false;
-        SceneManager.LoadScene("StageSelect");
+        SceneManager.LoadScene("Hozumi2");
     }
 }

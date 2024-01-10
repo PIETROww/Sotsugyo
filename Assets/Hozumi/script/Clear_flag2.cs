@@ -41,6 +41,6 @@ public class Clear_flag2 : MonoBehaviour
     void SceneLoad()
     {
         clearImage.enabled = false;
-        SceneManager.LoadScene("StageSelect");
+        SceneManager.LoadScene("TitleScene");
     }
 }
