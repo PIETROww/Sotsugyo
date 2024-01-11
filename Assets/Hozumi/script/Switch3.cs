@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.ParticleSystem;
 
 public class NewBehaviourScript : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class NewBehaviourScript : MonoBehaviour
 
     public AudioClip switchSE;
     private AudioSource audioSource;
+
+    [SerializeField] private ParticleSystem particle;
 
     private void Start()
     {
@@ -27,6 +30,7 @@ public class NewBehaviourScript : MonoBehaviour
 
             if (transform.position.y <= bottomY)
             {
+                particle.Play();
                 audioSource.Play();
                 wall.isOpen2 = true;
                 enabled = false;

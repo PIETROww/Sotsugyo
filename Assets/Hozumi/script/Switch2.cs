@@ -14,6 +14,8 @@ public class Switch2 : MonoBehaviour
     public AudioClip switchSE;
     private AudioSource audioSource;
 
+    [SerializeField] private ParticleSystem particle;
+
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -27,6 +29,7 @@ public class Switch2 : MonoBehaviour
 
             if (transform.position.y <= bottomY)
             {
+                particle.Play();
                 audioSource.Play();
                 wall.isOpen1 = true;
                 enabled = false;
