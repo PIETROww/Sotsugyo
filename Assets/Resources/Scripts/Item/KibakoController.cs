@@ -34,3 +34,34 @@ public class KibakoController : MonoBehaviour
         }
     }
 }
+
+//Playerの砂煙のソースコード
+
+
+//[SerializeField] private ParticleSystem particle;
+//public float t;
+
+
+//if (this.state == State.Move)
+//{
+//    Effect();
+//}
+
+
+//private void Effect()
+//{
+//    t += Time.deltaTime;
+
+
+//    if (t >= 0.5)
+//    {
+//        ParticleSystem newParticle = Instantiate(particle);
+//        newParticle.transform.position = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z - 0.5f);
+//        newParticle.Play();
+//        t = 0.0f;
+//    }
+//    if (this.state != State.Move)
+//    {
+//        t = 0.0f;
+//    }
+//}
