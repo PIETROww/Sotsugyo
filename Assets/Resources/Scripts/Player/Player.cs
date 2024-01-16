@@ -84,8 +84,9 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         tr = this.transform;
 
-        Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
-            catFlag, duckFlag, penguinFlag, sheepFlag);
+        //Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
+        //    catFlag, duckFlag, penguinFlag, sheepFlag);
+        Copy();
     }
 
     // Update is called once per frame
@@ -315,12 +316,16 @@ public class Player : MonoBehaviour
             //カメラを先にチェックポイント付近に移動させる
 
             //チェックポイントにワープする
+
+            //今はとりあえずゲームオーバーに
+            HP = 0;
         }
     }
 
     //変身
-    public void Copy(ref CharaUniqueAction uniqueAction, ref GameObject[] characters, ref Animator animator, ref GameObject attackObj,
-        bool catFlag, bool duckFlag, bool penguinFlag, bool sheepFlag)  //引数多すぎ
+    //public void Copy(ref CharaUniqueAction uniqueAction, ref GameObject[] characters, ref Animator animator, ref GameObject attackObj,
+    //    bool catFlag, bool duckFlag, bool penguinFlag, bool sheepFlag)  //引数多すぎ
+    public void Copy()
     {
 
         if (uniqueAction != null)
@@ -447,8 +452,7 @@ public class Player : MonoBehaviour
             duckFlag = false;
             penguinFlag = false;
             sheepFlag = false;
-            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
-                catFlag, duckFlag, penguinFlag, sheepFlag);
+            Copy();
         }
         if (other.gameObject == copyItem[1])
         {
@@ -456,8 +460,7 @@ public class Player : MonoBehaviour
             duckFlag = true;
             penguinFlag = false;
             sheepFlag = false;
-            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
-                catFlag, duckFlag, penguinFlag, sheepFlag);
+            Copy();
         }
         if (other.gameObject == copyItem[2])
         {
@@ -465,8 +468,7 @@ public class Player : MonoBehaviour
             duckFlag = false;
             penguinFlag = true;
             sheepFlag = false;
-            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
-                catFlag, duckFlag, penguinFlag, sheepFlag);
+            Copy();
         }
         if (other.gameObject == copyItem[3])
         {
@@ -474,8 +476,7 @@ public class Player : MonoBehaviour
             duckFlag = false;
             penguinFlag = false;
             sheepFlag = true;
-            Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
-                catFlag, duckFlag, penguinFlag, sheepFlag);
+            Copy();
         }
     }
 }

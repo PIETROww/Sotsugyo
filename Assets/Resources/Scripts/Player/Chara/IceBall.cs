@@ -6,6 +6,8 @@ public class IceBall : MonoBehaviour
     public float distanceFromSurface;
     public LayerMask groundLayer;
     public float speed = 5.0f;
+    public int meltTime = 5;
+    float meltCount = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +18,8 @@ public class IceBall : MonoBehaviour
     void Update()
     {
         CheckGround();
+        meltCount += Time.deltaTime;
+        Melt();
     }
 
     private void FixedUpdate()
@@ -33,6 +37,13 @@ public class IceBall : MonoBehaviour
             Vector3 newPos = transform.position;
             newPos.y = hitInfo.point.y + distanceFromSurface;
             transform.position = newPos;
+        }
+    }
+     void Melt()
+    {
+        if(meltTime<meltCount)
+        {
+            Destroy(gameObject);
         }
     }
 }
