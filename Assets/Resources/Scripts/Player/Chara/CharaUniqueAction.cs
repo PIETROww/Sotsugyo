@@ -21,7 +21,7 @@ public class CharaUniqueActionDuck : CharaUniqueAction
 {
     public override void Action(GameObject attackObj, Animator anim, float attackCnt)
     {
-        Instantiate(attackObj, this.gameObject.transform.position, Quaternion.identity);
+        Instantiate(attackObj, gameObject.transform.position, Quaternion.identity);
     }
 }
 
@@ -36,7 +36,7 @@ public class CharaUniqueActionPenguin : CharaUniqueAction
         //    Instantiate(attackObj, this.gameObject.transform.position, Quaternion.identity);
         //    oneShot = true;
         //}
-        Instantiate(attackObj, this.gameObject.transform.position, Quaternion.identity);
+        Instantiate(attackObj, gameObject.transform.position, gameObject.transform.rotation);
     }
 }
 

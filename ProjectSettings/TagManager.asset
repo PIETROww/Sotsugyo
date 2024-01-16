@@ -13,6 +13,8 @@ TagManager:
   - ChangeItem_Duck
   - ChangeItem_Penguin
   - ChangeItem_Sheep
+  - PlayerAttack
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX
