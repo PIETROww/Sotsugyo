@@ -38,7 +38,10 @@ public class KibakoController : MonoBehaviour
 //Playerの砂煙のソースコード
 
 
-//[SerializeField] private ParticleSystem particle;
+//public GameObject effectPrefab;
+//public GameObject effectPrefab2;
+//public GameObject effectPrefab3;
+//public GameObject effectPrefab4;
 //public float t;
 
 
@@ -55,13 +58,37 @@ public class KibakoController : MonoBehaviour
 
 //    if (t >= 0.5)
 //    {
-//        ParticleSystem newParticle = Instantiate(particle);
-//        newParticle.transform.position = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z - 0.5f);
-//        newParticle.Play();
+//        GameObject sunakemuriEffect = Instantiate(effectPrefab, new Vector3(transform.position.x, transform.position.y - 0.6f, transform.position.z), Quaternion.identity);
+//        Destroy(sunakemuriEffect, 1.0f);
 //        t = 0.0f;
 //    }
 //    if (this.state != State.Move)
 //    {
 //        t = 0.0f;
 //    }
+//}
+
+//Playerの無敵アイテムとスピードアップアイテム取得時のエフェクト
+
+
+////ぶつかった対象が無敵アイテムの場合
+//if (other.gameObject.tag == "MutekiItem")
+//{
+//    mutekiFlag = true;
+//    GameObject mutekiEffect = Instantiate(effectPrefab2, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+//    mutekiEffect.transform.parent = this.gameObject.transform;
+//    Destroy(mutekiEffect, mutekiTime);
+
+//    GameObject getEffect = Instantiate(effectPrefab4, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+//    //mutekiEffect.transform.parent = this.gameObject.transform;
+//    Destroy(getEffect, 1.0f);
+//}
+
+////ぶつかった対象がスピードアップアイテムの場合
+//if (other.gameObject.tag == "SpeedupItem")
+//{
+//    StartCoroutine("SpeedUp");
+//    GameObject speedupEffect = Instantiate(effectPrefab3, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+//    speedupEffect.transform.parent = this.gameObject.transform;
+//    Destroy(speedupEffect, mutekiTime);
 //}
