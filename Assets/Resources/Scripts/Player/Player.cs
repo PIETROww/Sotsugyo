@@ -28,7 +28,9 @@ public class Player : MonoBehaviour
     public GameObject sheepAttackObj;
 
     //ステータス--------------------------
-    public int HP = 5;
+    public int maxHP = 5;
+    private int HP;
+    public GameObject[] HPImage;
     public int ATK = 1;
     public float speed = 5f;
 
@@ -72,15 +74,26 @@ public class Player : MonoBehaviour
     private bool mutekiFlag = false;
 
     //変身--------------------------------
-    public GameObject[] characters;
-    bool catFlag = false,
-        duckFlag = false,
-        penguinFlag = true,     //最初はペンギンにしておく
-        sheepFlag = false;
+    public enum Chara
+    {
+        Cat,
+        Duck,
+        Penguin,
+        Sheep,
+        Zako,
+    }
+    public Chara chara;
+
+    public GameObject[] charactersLooks;
+    //bool catFlag = false,
+    //    duckFlag = false,
+    //    penguinFlag = true,     //最初はペンギンにしておく
+    //    sheepFlag = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        HP = maxHP;
         rb = GetComponent<Rigidbody>();
         tr = this.transform;
 
@@ -95,6 +108,7 @@ public class Player : MonoBehaviour
         inputX = Input.GetAxis("Horizontal");
         inputZ = Input.GetAxis("Vertical");
 
+        HPDraw();
 
         //ここからジャンプ
         isGrounded = CheckGroundStatus();
@@ -269,8 +283,9 @@ public class Player : MonoBehaviour
     }
 
     void Damage()
-    {
-
+    {        
+        HPImage[HP - 1].SetActive(false);
+        HP -= 1;
     }
 
     void Dead()
@@ -318,7 +333,7 @@ public class Player : MonoBehaviour
             //チェックポイントにワープする
 
             //今はとりあえずゲームオーバーに
-            HP = 0;
+            //HP = 0;
         }
     }
 
@@ -334,43 +349,43 @@ public class Player : MonoBehaviour
             uniqueAction = null;    //nullを入れる
         }
 
-        if (catFlag)
+        if (chara == Chara.Cat)
         {
-            characters[0].SetActive(true);
-            characters[1].SetActive(false);
-            characters[2].SetActive(false);
-            characters[3].SetActive(false);
-            animator = characters[0].GetComponent<Animator>();
+            charactersLooks[0].SetActive(true);
+            charactersLooks[1].SetActive(false);
+            charactersLooks[2].SetActive(false);
+            charactersLooks[3].SetActive(false);
+            animator = charactersLooks[0].GetComponent<Animator>();
             attackObj = catAttackObj;
             uniqueAction = gameObject.AddComponent<CharaUniqueActionCat>();
         }
-        if (duckFlag)
+        if (chara == Chara.Duck)
         {
-            characters[0].SetActive(false);
-            characters[1].SetActive(true);
-            characters[2].SetActive(false);
-            characters[3].SetActive(false);
-            animator = characters[1].GetComponent<Animator>();
+            charactersLooks[0].SetActive(false);
+            charactersLooks[1].SetActive(true);
+            charactersLooks[2].SetActive(false);
+            charactersLooks[3].SetActive(false);
+            animator = charactersLooks[1].GetComponent<Animator>();
             attackObj = duckAttackObj;
             uniqueAction = gameObject.AddComponent<CharaUniqueActionDuck>();
         }
-        if (penguinFlag)
+        if (chara == Chara.Penguin)
         {
-            characters[0].SetActive(false);
-            characters[1].SetActive(false);
-            characters[2].SetActive(true);
-            characters[3].SetActive(false);
-            animator = characters[2].GetComponent<Animator>();
+            charactersLooks[0].SetActive(false);
+            charactersLooks[1].SetActive(false);
+            charactersLooks[2].SetActive(true);
+            charactersLooks[3].SetActive(false);
+            animator = charactersLooks[2].GetComponent<Animator>();
             attackObj = penguinAttackObj;
             uniqueAction = gameObject.AddComponent<CharaUniqueActionPenguin>();
         }
-        if (sheepFlag)
+        if (chara == Chara.Sheep)
         {
-            characters[0].SetActive(false);
-            characters[1].SetActive(false);
-            characters[2].SetActive(false);
-            characters[3].SetActive(true);
-            animator = characters[3].GetComponent<Animator>();
+            charactersLooks[0].SetActive(false);
+            charactersLooks[1].SetActive(false);
+            charactersLooks[2].SetActive(false);
+            charactersLooks[3].SetActive(true);
+            animator = charactersLooks[3].GetComponent<Animator>();
             attackObj = sheepAttackObj;
             uniqueAction = gameObject.AddComponent<CharaUniqueActionSheep>();
         }
@@ -392,6 +407,11 @@ public class Player : MonoBehaviour
             isHit = true;
         }
         return isHit;
+    }
+
+    void HPDraw()
+    {
+
     }
 
     //着地処理を可視化するための処理
@@ -427,12 +447,12 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "HealItem")
         {
             HP += 1;
-
-            //HPが5以上回復しないようにする
-            if (HP > 5)
+            //HPがmaxHP以上回復しないようにする
+            if (HP > maxHP)
             {
-                HP = 5;
+                HP = maxHP;
             }
+            HPImage[HP - 1].SetActive(true);
         }
 
         if (other.gameObject.tag == "Enemy")
@@ -442,40 +462,29 @@ public class Player : MonoBehaviour
             //    Destroy(other.gameObject);    //敵側でやることにした
             ////無敵でない時は、ダメージを受ける
             //else
-            HP -= 1;
+            //HP -= 1;
+            state = State.Damage;
         }
 
         //変身のフラグを設定＋変身する
         if (other.gameObject == copyItem[0])
         {
-            catFlag = true;
-            duckFlag = false;
-            penguinFlag = false;
-            sheepFlag = false;
+            chara = Chara.Cat;
             Copy();
         }
         if (other.gameObject == copyItem[1])
         {
-            catFlag = false;
-            duckFlag = true;
-            penguinFlag = false;
-            sheepFlag = false;
+            chara = Chara.Duck;
             Copy();
         }
         if (other.gameObject == copyItem[2])
         {
-            catFlag = false;
-            duckFlag = false;
-            penguinFlag = true;
-            sheepFlag = false;
+            chara = Chara.Penguin;
             Copy();
         }
         if (other.gameObject == copyItem[3])
         {
-            catFlag = false;
-            duckFlag = false;
-            penguinFlag = false;
-            sheepFlag = true;
+            chara = Chara.Sheep;
             Copy();
         }
     }

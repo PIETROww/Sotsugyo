@@ -21,7 +21,7 @@ public class CharaUniqueActionDuck : CharaUniqueAction
 {
     public override void Action(GameObject attackObj, Animator anim, float attackCnt)
     {
-        Instantiate(attackObj, gameObject.transform.position, Quaternion.identity);
+        //Instantiate(attackObj, gameObject.transform.position, Quaternion.identity);
     }
 }
 
@@ -45,5 +45,6 @@ public class CharaUniqueActionSheep : CharaUniqueAction
     public override void Action(GameObject attackObj, Animator anim, float attackCnt)
     {
         attackObj.SetActive(true);
+        //attackObj.SetActive(false);
     }
 }

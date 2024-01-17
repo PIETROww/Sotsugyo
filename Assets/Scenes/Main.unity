@@ -3658,7 +3658,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &499606561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4610,7 +4610,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 619500398}
   m_LocalRotation: {x: 0.16710421, y: -0.000000016964448, z: 0.0000000028752591, w: 0.98593926}
-  m_LocalPosition: {x: 0, y: 6.54, z: -6.4}
+  m_LocalPosition: {x: 68, y: 38.04, z: 203.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11558,7 +11558,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1783864338}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.5, z: 0}
+  m_LocalPosition: {x: 68, y: 34, z: 209.5}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -11588,7 +11588,8 @@ MonoBehaviour:
   duckAttackObj: {fileID: 0}
   penguinAttackObj: {fileID: 6101226562440201217, guid: dda10a068ef78d84cac231e31ff3e0cd, type: 3}
   sheepAttackObj: {fileID: 67868146}
-  HP: 5
+  maxHP: 5
+  HPImage: []
   ATK: 1
   speed: 10
   jumpPower: 7
@@ -11636,7 +11637,8 @@ MonoBehaviour:
   attackTime: 1
   damageTime: 2
   mutekiTime: 10
-  characters:
+  chara: 0
+  charactersLooks:
   - {fileID: 250103889}
   - {fileID: 1872905218}
   - {fileID: 436907266}
