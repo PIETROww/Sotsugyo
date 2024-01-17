@@ -50,12 +50,13 @@ public class Enemy : MonoBehaviour
     }
     public Chara chara;
     public GameObject[] characters;
-    bool catFlag = false,           
-        duckFlag = false,           
-        penguinFlag = false,        
-        sheepFlag = false,          
-        zakoFlag = false;           
+    bool catFlag = false,
+        duckFlag = false,
+        penguinFlag = false,
+        sheepFlag = false,
+        zakoFlag = false;
 
+    bool isDamaged = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,12 +84,12 @@ public class Enemy : MonoBehaviour
         switch (state)
         {
             case State.Idle:
-                if (sensor) { 
-                    state = State.Capture; }
+                if (sensor) { state = State.Capture; }
+                if (isDamaged) { state = State.Damage; }
                 break;
             case State.Capture:
-                if (!sensor) { 
-                    state = State.Idle; }
+                if (!sensor) { state = State.Idle; }
+                if (isDamaged) { state = State.Damage; }
                 if (attackSensor) { state = State.Attack; }
                 break;
             case State.Attack:
@@ -98,12 +99,16 @@ public class Enemy : MonoBehaviour
                     {
                         attackCnt = 0.0f;
                         attackFlag = true;
+                        if(chara==Chara.Cat||chara==Chara.Sheep)
+                        {
+                            attackObj.SetActive(false);
+                        }
                         this.state = State.Idle;
                     }
                 }
-
                 break;
             case State.Damage:
+                isDamaged = false;
                 state = State.Idle;
                 break;
             case State.Dead:
@@ -131,11 +136,11 @@ public class Enemy : MonoBehaviour
                     attackFlag = false;
                 }
                 break;
-                case State.Damage:
+            case State.Damage:
                 animator.SetTrigger("stun");
                 Damage();
                 break;
-                case State.Dead:
+            case State.Dead:
                 break;
         }
     }
@@ -315,9 +320,9 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag=="PlayerAttack")
+        if (other.gameObject.tag == "PlayerAttack")
         {
-            state = State.Damage;
+            isDamaged = true;
         }
     }
 }
