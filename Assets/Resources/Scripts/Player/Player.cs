@@ -67,6 +67,8 @@ public class Player : MonoBehaviour
     //ダメージを受けたときの処理----------
     public float damageTime = 2.0f;
     private float damageCnt = 0.0f;
+    private bool isDamaged;
+    private MeshRenderer mesh;
 
     //無敵--------------------------------
     public float mutekiTime = 10.0f;
@@ -96,6 +98,7 @@ public class Player : MonoBehaviour
         HP = maxHP;
         rb = GetComponent<Rigidbody>();
         tr = this.transform;
+        mesh = GetComponent<MeshRenderer>();
 
         //Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
         //    catFlag, duckFlag, penguinFlag, sheepFlag);
@@ -107,8 +110,6 @@ public class Player : MonoBehaviour
     {
         inputX = Input.GetAxis("Horizontal");
         inputZ = Input.GetAxis("Vertical");
-
-        HPDraw();
 
         //ここからジャンプ
         isGrounded = CheckGroundStatus();
@@ -178,13 +179,13 @@ public class Player : MonoBehaviour
                 if (isGrounded && moveForward.magnitude > 0) { this.state = State.Move; }
                 if (jumping) { this.state = State.Jump; }
                 if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
-                //ダメージへの遷移
+                //if (isDamaged) { state = State.Damage; }
                 break;
             case State.Move:
                 if (moveForward.magnitude <= 0) { this.state = State.Idle; }
                 if (jumping) { this.state = State.Jump; }
                 if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
-                //ダメージへの遷移
+                //if (isDamaged) { state = State.Damage; }
                 break;
             case State.Jump:
                 if (isGrounded) { this.state = State.Idle; }
@@ -197,7 +198,7 @@ public class Player : MonoBehaviour
                     this.state = State.Attack;
 
                 }
-                //ダメージへの遷移
+                //if (isDamaged) { state = State.Damage; }
                 break;
 
             case State.Attack:
@@ -207,15 +208,18 @@ public class Player : MonoBehaviour
                     attackFlag = true;
                     this.state = State.Idle;
                 }
+                //if (isDamaged) { state = State.Damage; }
                 break;
-            case State.Damage:
-                if (damageTime <= damageCnt)
-                {
-                    damageCnt = 0.0f;
-                    this.state = State.Idle;
-                }
-                if (this.HP <= 0) { this.state = State.Dead; }
-                break;
+                //case State.Damage:
+                //    //if (damageTime <= damageCnt)
+                //    //{
+                //    //    damageCnt = 0.0f;
+                //    //    this.state = State.Idle;
+                //    //}
+                //    isDamaged = false;
+                //    state = State.Idle;
+                //if (this.HP <= 0) { this.state = State.Dead; }
+                //break;
         }
     }
 
@@ -244,11 +248,11 @@ public class Player : MonoBehaviour
                     attackFlag = false;
                 }
                 break;
-            case State.Damage:
-                animator.SetTrigger("stun");
-                damageCnt += Time.deltaTime;
-                Damage();
-                break;
+            //case State.Damage:
+            //    animator.SetTrigger("stun");
+            //    //damageCnt += Time.deltaTime;
+            //    Damage();
+            //break;
             case State.Dead:
                 Dead();
                 break;
@@ -283,7 +287,7 @@ public class Player : MonoBehaviour
     }
 
     void Damage()
-    {        
+    {
         HPImage[HP - 1].SetActive(false);
         HP -= 1;
     }
@@ -302,6 +306,15 @@ public class Player : MonoBehaviour
 
             //無敵時間を進める
             timeCnt += Time.deltaTime;
+            //点滅させる
+            if (timeCnt % 0.2f < 0.1f)
+            {
+                mesh.enabled = true;
+            }
+            else
+            {
+                mesh.enabled = false;
+            }
 
             //無敵時間を過ぎたとき
             if (timeCnt >= mutekiTime)
@@ -409,11 +422,6 @@ public class Player : MonoBehaviour
         return isHit;
     }
 
-    void HPDraw()
-    {
-
-    }
-
     //着地処理を可視化するための処理
     private void OnDrawGizmos()
     {
@@ -462,8 +470,9 @@ public class Player : MonoBehaviour
             //    Destroy(other.gameObject);    //敵側でやることにした
             ////無敵でない時は、ダメージを受ける
             //else
-            //HP -= 1;
-            state = State.Damage;
+            if (state != State.Dead)
+                Damage();
+            //isDamaged = true;
         }
 
         //変身のフラグを設定＋変身する
@@ -486,6 +495,16 @@ public class Player : MonoBehaviour
         {
             chara = Chara.Sheep;
             Copy();
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "EnemyAttack")
+        {
+            //isDamaged = true;
+            if (state != State.Dead)
+                Damage();
         }
     }
 }

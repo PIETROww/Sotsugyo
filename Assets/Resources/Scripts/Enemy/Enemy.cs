@@ -86,11 +86,13 @@ public class Enemy : MonoBehaviour
             case State.Idle:
                 if (sensor) { state = State.Capture; }
                 if (isDamaged) { state = State.Damage; }
+                //if(HP<=0) { state = State.Dead; }
                 break;
             case State.Capture:
                 if (!sensor) { state = State.Idle; }
                 if (isDamaged) { state = State.Damage; }
                 if (attackSensor) { state = State.Attack; }
+                //if (HP <= 0) { state = State.Dead; }
                 break;
             case State.Attack:
                 if (!attackSensor)
@@ -106,10 +108,13 @@ public class Enemy : MonoBehaviour
                         this.state = State.Idle;
                     }
                 }
+                //if (HP <= 0) { state = State.Dead; }
                 break;
             case State.Damage:
                 isDamaged = false;
                 state = State.Idle;
+                //if (HP <= 0) { state = State.Dead; }
+
                 break;
             case State.Dead:
                 break;
@@ -141,6 +146,7 @@ public class Enemy : MonoBehaviour
                 Damage();
                 break;
             case State.Dead:
+                Dead();
                 break;
         }
     }
@@ -179,15 +185,7 @@ public class Enemy : MonoBehaviour
     {
         uniqueAction.Action(attackObj, animator, attackCnt);
     }
-    private void OnCollisionEnter(Collision col)
-    {
-        if (col.gameObject == player)
-        {
-            //player.GetComponent<Player>().HP -= 1;    //プレイヤー側でやってる
 
-            state = State.Damage;
-        }
-    }
 
     void Damage()
     {
@@ -317,7 +315,15 @@ public class Enemy : MonoBehaviour
             //animator = characters[4].GetComponent<Animator>();
         }
     }
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject == player)
+        {
+            //player.GetComponent<Player>().HP -= 1;    //プレイヤー側でやってる
 
+            state = State.Damage;
+        }
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "PlayerAttack")

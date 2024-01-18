@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2408671740423385673}
   - component: {fileID: 5592520206162862036}
   - component: {fileID: 3321334152779060582}
+  - component: {fileID: 6465231997755608482}
   m_Layer: 0
   m_Name: EnemyIceBall
   m_TagString: EnemyAttack
@@ -124,3 +125,15 @@ MonoBehaviour:
     m_Bits: 64
   speed: 7
   meltTime: 3
+--- !u!114 &6465231997755608482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6101226562440201217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52194f0c8613e284290c7d58162e09a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
