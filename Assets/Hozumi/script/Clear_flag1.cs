@@ -22,7 +22,7 @@ public class Clear_flag1 : MonoBehaviour
         {
             audioSource.PlayOneShot(se1);
             clearImage.enabled = true;            
-            Invoke("SceneLoad", 2);
+            //Invoke("SceneLoad", 2);
         }
     }
    
