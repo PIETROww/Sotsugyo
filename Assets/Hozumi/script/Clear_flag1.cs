@@ -21,8 +21,7 @@ public class Clear_flag1 : MonoBehaviour
         if(other.gameObject.tag=="Player")
         {
             audioSource.PlayOneShot(se1);
-            clearImage.enabled = true;
-                        
+            clearImage.enabled = true;            
             Invoke("SceneLoad", 2);
         }
     }
