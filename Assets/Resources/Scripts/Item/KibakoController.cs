@@ -92,3 +92,57 @@ public class KibakoController : MonoBehaviour
 //    speedupEffect.transform.parent = this.gameObject.transform;
 //    Destroy(speedupEffect, mutekiTime);
 //}
+
+//Playerが変身アイテムを取得時のエフェクト
+
+
+//enum State
+//{
+//    Idle,
+//    Move,
+//    Jump,
+//    Attack,
+//    Damage,
+//    Dead,
+//    Stop,
+//}
+
+//public float et;
+//public bool change;
+
+//StartThink内
+
+//各State内に
+
+//if (change) { state = State.Stop; }
+
+//case State.Stop:
+//if (1.0f <= et)
+//{
+//    et = 0.0f;
+//    this.state = State.Idle;
+//}
+//change = false;
+//state = State.Idle;
+//break;
+
+//StartMove内
+
+//case State.Stop:
+//animator.SetTrigger("Idle");
+//et += Time.deltaTime;
+//break;
+
+//public void Effect()
+//{
+//    GameObject speedupEffect = Instantiate(effectPrefab3, this.transform.position, Quaternion.identity);
+//    Destroy(speedupEffect, 1.0f);
+//}
+
+////ぶつかった対象が回復アイテムの場合
+//if (other.gameObject.tag == "HealItem")
+//{
+//    change = true;
+//    GameObject speedupEffect = Instantiate(effectPrefab3, this.transform.position, Quaternion.identity);
+//    Destroy(speedupEffect, 1.0f);
+//}
