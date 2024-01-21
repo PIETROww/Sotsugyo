@@ -38,33 +38,34 @@ public class KibakoController : MonoBehaviour
 //Playerの砂煙のソースコード
 
 
-//public GameObject effectPrefab;
+//public GameObject sunakemuriEffectPrefab;
 //public GameObject effectPrefab2;
 //public GameObject effectPrefab3;
 //public GameObject effectPrefab4;
-//public float t;
+//private float effectCnt = 0.0f;
 
 
+////StateがMove状態の場合、砂煙エフェクトを再生する
 //if (this.state == State.Move)
 //{
-//    Effect();
+//    sunakemuriEffect();
 //}
 
 
-//private void Effect()
+////砂煙エフェクト
+//private void sunakemuriEffect()
 //{
-//    t += Time.deltaTime;
+//    effectCnt += Time.deltaTime;
 
-
-//    if (t >= 0.5)
+//    if (effectCnt >= 0.3)
 //    {
-//        GameObject sunakemuriEffect = Instantiate(effectPrefab, new Vector3(transform.position.x, transform.position.y - 0.6f, transform.position.z), Quaternion.identity);
+//        GameObject sunakemuriEffect = Instantiate(sunakemuriEffectPrefab, new Vector3(transform.position.x, transform.position.y - 0.7f, transform.position.z), Quaternion.identity);
 //        Destroy(sunakemuriEffect, 1.0f);
-//        t = 0.0f;
+//        effectCnt = 0.0f;
 //    }
 //    if (this.state != State.Move)
 //    {
-//        t = 0.0f;
+//        effectCnt = 0.0f;
 //    }
 //}
 
@@ -114,7 +115,7 @@ public class KibakoController : MonoBehaviour
 
 //各State内に
 
-//if (change) { state = State.Stop; }
+//if (changeFlag) { state = State.Stop; }
 
 //case State.Stop:
 //if (1.0f <= et)
@@ -142,7 +143,7 @@ public class KibakoController : MonoBehaviour
 ////ぶつかった対象が回復アイテムの場合
 //if (other.gameObject.tag == "HealItem")
 //{
-//    change = true;
+//    changeFlag = true;
 //    GameObject speedupEffect = Instantiate(effectPrefab3, this.transform.position, Quaternion.identity);
 //    Destroy(speedupEffect, 1.0f);
 //}
