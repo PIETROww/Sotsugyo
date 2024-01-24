@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GameUIScript : MonoBehaviour
 {
     private EventSystem eventSystem;
+    GameManager gm;
 
     [SerializeField] private GameObject Menu;
     [SerializeField] private GameObject sousaUI;
@@ -23,6 +24,8 @@ public class GameUIScript : MonoBehaviour
         Menu.SetActive(false);
         sousaUI.SetActive(false);
         MenuPanel.SetActive(false);
+        gm = GameManager.instance;
+        Time.timeScale = 1.0f;
     }
 
     private void Update()
@@ -42,8 +45,18 @@ public class GameUIScript : MonoBehaviour
     //ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー
     public void MenuUI()
     {
+
+        //スタート直後が０
+        //ボタン押したらelseで１になる
+        //そのまま押したら動き始める
+        //
         Menu.SetActive(true);
-        if(Time.timeScale == 1.0f)
+
+        EventSystem.current.SetSelectedGameObject(MenuButton.gameObject);
+    }
+    public void MenuButtonDown()
+    {
+        if (Time.timeScale == 1.0f)
         {
             Time.timeScale = 0.0f;
         }
@@ -51,11 +64,6 @@ public class GameUIScript : MonoBehaviour
         {
             Time.timeScale = 1.0f;
         }
-
-        EventSystem.current.SetSelectedGameObject(MenuButton.gameObject);
-    }
-    public void MenuButtonDown()
-    {
         MenuPanel.SetActive(true);
         EventSystem.current.SetSelectedGameObject(SousaButton.gameObject);
     }
@@ -69,7 +77,14 @@ public class GameUIScript : MonoBehaviour
 
     public void ReturnButtonDown()
     {
+        Time.timeScale = 1.0f;
+        MenuPanel.SetActive(false);
         sousaUI.SetActive(false);
         MenuUI();
+    }
+
+    public void StageSelectButtonDown()
+    {
+        gm.LoadScene("StageSelect");
     }
 }
