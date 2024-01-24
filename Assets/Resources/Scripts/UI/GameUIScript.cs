@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GameUIScript : MonoBehaviour
 {
     private EventSystem eventSystem;
+    GameManager gm;
 
     [SerializeField] private GameObject Menu;
     [SerializeField] private GameObject sousaUI;
@@ -23,6 +24,7 @@ public class GameUIScript : MonoBehaviour
         Menu.SetActive(false);
         sousaUI.SetActive(false);
         MenuPanel.SetActive(false);
+        gm = GameManager.instance;
     }
 
     private void Update()
@@ -69,7 +71,13 @@ public class GameUIScript : MonoBehaviour
 
     public void ReturnButtonDown()
     {
+        MenuPanel.SetActive(false);
         sousaUI.SetActive(false);
         MenuUI();
+    }
+
+    public void StageSelectButtonDown()
+    {
+        gm.LoadScene("StageSelect");
     }
 }
