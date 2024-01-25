@@ -1,5 +1,7 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -18,6 +20,10 @@ public class Player : MonoBehaviour
     private CharaUniqueAction uniqueAction = null;
 
     private float inputX, inputZ;
+    //InputSystem周り
+    private GameInputs gameInputs;
+    private Vector2 moveInputValue;
+
     private Rigidbody rb;
     private Vector3 moveForward;
 
@@ -65,11 +71,11 @@ public class Player : MonoBehaviour
     private float attackCnt = 0.0f;
     private bool attackFlag = true;
 
-    //ダメージを受けたときの処理----------
-    public float damageTime = 2.0f;
-    private float damageCnt = 0.0f;
-    private bool isDamaged;
-    private MeshRenderer mesh;
+    ////ダメージを受けたときの処理----------
+    //public float damageTime = 2.0f;
+    //private float damageCnt = 0.0f;
+    //private bool isDamaged;
+    //private MeshRenderer mesh;
 
     //無敵--------------------------------
     public float mutekiTime = 15.0f;
@@ -116,10 +122,21 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //InputSystemの、Actionクラスの設定
+        gameInputs = new GameInputs();
+        //各Actionイベント登録
+        gameInputs.Player.Move.started += OnMove;       //started：入力され始め
+        gameInputs.Player.Move.performed += OnMove;     //performed：特定の入力があった時
+        gameInputs.Player.Move.canceled += OnMove;      //canceled：入力を中断したら
+        gameInputs.Player.Jump.started += OnJump;
+        gameInputs.Player.Jump.canceled += OffJump;
+        //有効化する→この一行がないと動作しない
+        gameInputs.Enable();
+
         HP = maxHP;
         rb = GetComponent<Rigidbody>();
         tr = this.transform;
-        mesh = GetComponent<MeshRenderer>();
+        //mesh = GetComponent<MeshRenderer>();
 
         //Copy(ref uniqueAction, ref characters, ref animator, ref attackObj,
         //    catFlag, duckFlag, penguinFlag, sheepFlag);
@@ -135,20 +152,16 @@ public class Player : MonoBehaviour
         //ここからジャンプ
         isGrounded = CheckGroundStatus();
 
-        // ジャンプの開始判定
-        if (isGrounded && Input.GetButtonDown(JumpButtonName))
-        {
-            jumping = true;
-        }
         // ジャンプ中の処理
         if (jumping)
         {
-            if (Input.GetButtonUp(JumpButtonName) || jumpTime >= maxJumpTime)
+            if (jumpTime >= maxJumpTime)
             {
                 jumping = false;
                 jumpTime = 0;
             }
-            else if (Input.GetButton(JumpButtonName))
+            //else if (Input.GetButton(JumpButtonName))
+            else
             {
                 jumpTime += Time.deltaTime;
             }
@@ -198,6 +211,26 @@ public class Player : MonoBehaviour
         Muteki();
     }
 
+    //移動ボタン--------------------------------
+    private void OnMove(InputAction.CallbackContext context)
+    {
+        //Moveアクションの入力取得
+        moveInputValue = context.ReadValue<Vector2>();
+    }
+    //ジャンプボタン-------------------------------------------------
+    private void OnJump(InputAction.CallbackContext context)
+    {
+        //Jumpアクションの入力取得
+        if (isGrounded)
+        {
+            jumping = true;
+        }
+    }
+    private void OffJump(InputAction.CallbackContext context)
+    {
+        jumping = false;            //降下を開始
+        jumpTime = 0;
+    }
     private void StateThink()
     {
         switch (this.state)
@@ -337,7 +370,7 @@ public class Player : MonoBehaviour
 
     void Dead()
     {
-
+        SceneManager.LoadScene("StageSelect");
     }
 
     private void Muteki()
@@ -573,7 +606,11 @@ public class Player : MonoBehaviour
             ////無敵でない時は、ダメージを受ける
             //else
             if (state != State.Dead)
-                Damage();
+            {
+                if (!mutekiFlag)
+                    Damage();
+            }
+
             //isDamaged = true;
         }
 
@@ -614,7 +651,10 @@ public class Player : MonoBehaviour
         {
             //isDamaged = true;
             if (state != State.Dead)
-                Damage();
+            {
+                if (!mutekiFlag)
+                    Damage();
+            }
         }
     }
 }

@@ -56,6 +56,9 @@ public class Enemy : MonoBehaviour
         sheepFlag = false,
         zakoFlag = false;
 
+    //生成するアイテム
+    public GameObject[] items;
+
     bool isDamaged = false;
     // Start is called before the first frame update
     void Start()
@@ -86,13 +89,13 @@ public class Enemy : MonoBehaviour
             case State.Idle:
                 if (sensor) { state = State.Capture; }
                 if (isDamaged) { state = State.Damage; }
-                //if(HP<=0) { state = State.Dead; }
+                if (HP <= 0) { state = State.Dead; }
                 break;
             case State.Capture:
                 if (!sensor) { state = State.Idle; }
                 if (isDamaged) { state = State.Damage; }
                 if (attackSensor) { state = State.Attack; }
-                //if (HP <= 0) { state = State.Dead; }
+                if (HP <= 0) { state = State.Dead; }
                 break;
             case State.Attack:
                 if (!attackSensor)
@@ -101,19 +104,19 @@ public class Enemy : MonoBehaviour
                     {
                         attackCnt = 0.0f;
                         attackFlag = true;
-                        if(chara==Chara.Cat||chara==Chara.Sheep)
+                        if (chara == Chara.Cat || chara == Chara.Sheep)
                         {
                             attackObj.SetActive(false);
                         }
                         this.state = State.Idle;
                     }
                 }
-                //if (HP <= 0) { state = State.Dead; }
+                if (HP <= 0) { state = State.Dead; }
                 break;
             case State.Damage:
                 isDamaged = false;
                 state = State.Idle;
-                //if (HP <= 0) { state = State.Dead; }
+                if (HP <= 0) { state = State.Dead; }
 
                 break;
             case State.Dead:
@@ -198,7 +201,21 @@ public class Enemy : MonoBehaviour
     void Dead()
     {
         //変身アイテムを生成
-
+        switch (chara)
+        {
+            case Chara.Cat:
+                Instantiate(items[0], transform.position, Quaternion.identity);
+                break;
+            case Chara.Duck:
+                Instantiate(items[1], transform.position, Quaternion.identity);
+                break;
+            case Chara.Penguin:
+                Instantiate(items[2], transform.position, Quaternion.identity);
+                break;
+            case Chara.Sheep:
+                Instantiate(items[3], transform.position, Quaternion.identity);
+                break;
+        }
 
         Destroy(gameObject);
 
