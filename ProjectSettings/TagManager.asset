@@ -25,6 +25,7 @@ TagManager:
   - Ground
   - Sensor
   - PlayerShot
+  - EnemyShot
   - Kibako
   - 
   - 

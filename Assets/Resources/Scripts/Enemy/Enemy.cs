@@ -111,6 +111,7 @@ public class Enemy : MonoBehaviour
                         this.state = State.Idle;
                     }
                 }
+                if (isDamaged) { state = State.Damage; }
                 if (HP <= 0) { state = State.Dead; }
                 break;
             case State.Damage:
@@ -332,9 +333,9 @@ public class Enemy : MonoBehaviour
             //animator = characters[4].GetComponent<Animator>();
         }
     }
-    private void OnCollisionEnter(Collision col)
+    private void OnCollisionEnter(Collision other)
     {
-        if (col.gameObject == player)
+        if (other.gameObject == player)
         {
             //player.GetComponent<Player>().HP -= 1;    //ÉvÉåÉCÉÑÅ[ë§Ç≈Ç‚Ç¡ÇƒÇÈ
 

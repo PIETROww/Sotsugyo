@@ -1751,7 +1751,7 @@ GameObject:
   - component: {fileID: 235605389}
   m_Layer: 0
   m_Name: ItemPenguin
-  m_TagString: Untagged
+  m_TagString: ChangeItem_Penguin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2176,7 +2176,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2194,6 +2194,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 377076075}
+  - {fileID: 874684371}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2544,8 +2545,8 @@ GameObject:
   - component: {fileID: 447478908}
   - component: {fileID: 447478907}
   - component: {fileID: 447478906}
-  m_Layer: 0
-  m_Name: SheepAttackObj
+  m_Layer: 8
+  m_Name: SheepAttackObjDemo
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2923,6 +2924,111 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24a77ab73cfeaa54ba72daf6e1dd0f2e, type: 3}
+--- !u!1 &518157610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 518157611}
+  - component: {fileID: 518157614}
+  - component: {fileID: 518157613}
+  - component: {fileID: 518157612}
+  m_Layer: 8
+  m_Name: SheepAttackObj
+  m_TagString: PlayerAttack
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &518157611
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518157610}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 3.5, y: 3.5, z: 3.5}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1426020171}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &518157612
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518157610}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &518157613
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518157610}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &518157614
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518157610}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &520928414 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3150913133528022724, guid: 1400301ed26c91f44a959a300e3e18b3, type: 3}
@@ -3067,7 +3173,7 @@ GameObject:
   - component: {fileID: 538069622}
   - component: {fileID: 538069621}
   - component: {fileID: 538069620}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyCatAttackObj
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
@@ -3458,7 +3564,7 @@ GameObject:
   - component: {fileID: 783648866}
   - component: {fileID: 783648865}
   - component: {fileID: 783648864}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CatAttackObj
   m_TagString: PlayerAttack
   m_Icon: {fileID: 0}
@@ -3567,7 +3673,7 @@ GameObject:
   - component: {fileID: 807379039}
   - component: {fileID: 807379040}
   - component: {fileID: 807379041}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Sensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3882,6 +3988,99 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24a77ab73cfeaa54ba72daf6e1dd0f2e, type: 3}
+--- !u!1 &874684370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 874684371}
+  - component: {fileID: 874684374}
+  - component: {fileID: 874684373}
+  - component: {fileID: 874684372}
+  m_Layer: 5
+  m_Name: GameOver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &874684371
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874684370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 316000057}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 500, y: 250}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &874684372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874684370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7811e9d7b3c5b9f4ca6e837a3cf7637e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &874684373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874684370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 70
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 82
+    m_Alignment: 1
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: "\u30B2\u30FC\u30E0\u30AA\u30FC\u30D0\u30FC\n\n"
+--- !u!222 &874684374
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874684370}
+  m_CullTransparentMesh: 1
 --- !u!1001 &902559642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3897,6 +4096,10 @@ PrefabInstance:
     - target: {fileID: 166016, guid: f657c58adb4c219419ae056411d88e27, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 166016, guid: f657c58adb4c219419ae056411d88e27, type: 3}
+      propertyPath: m_TagString
+      value: ChangeItem_Duck
       objectReference: {fileID: 0}
     - target: {fileID: 466016, guid: f657c58adb4c219419ae056411d88e27, type: 3}
       propertyPath: m_RootOrder
@@ -4562,7 +4765,7 @@ GameObject:
   - component: {fileID: 909826309}
   m_Layer: 0
   m_Name: ItemCat
-  m_TagString: Untagged
+  m_TagString: ChangeItem_Cat
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5649,6 +5852,10 @@ PrefabInstance:
     - target: {fileID: 137848, guid: b274f055acd44484e979267107f9a3c4, type: 3}
       propertyPath: m_Name
       value: Cat
+      objectReference: {fileID: 0}
+    - target: {fileID: 137848, guid: b274f055acd44484e979267107f9a3c4, type: 3}
+      propertyPath: m_TagString
+      value: ChangeItem_Cat
       objectReference: {fileID: 0}
     - target: {fileID: 437784, guid: b274f055acd44484e979267107f9a3c4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7069,6 +7276,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 106736, guid: 46398a79a336cba4c9c8998b2bff56c2, type: 3}
+      propertyPath: m_TagString
+      value: ChangeItem_Sheep
+      objectReference: {fileID: 0}
     - target: {fileID: 406736, guid: 46398a79a336cba4c9c8998b2bff56c2, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -7325,6 +7536,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 783648863}
+  - {fileID: 518157611}
   - {fileID: 447478905}
   - {fileID: 2982717}
   - {fileID: 1329627590}
@@ -7376,7 +7588,7 @@ MonoBehaviour:
   catAttackObj: {fileID: 783648862}
   duckAttackObj: {fileID: 0}
   penguinAttackObj: {fileID: 6101226562440201217, guid: dda10a068ef78d84cac231e31ff3e0cd, type: 3}
-  sheepAttackObj: {fileID: 447478904}
+  sheepAttackObj: {fileID: 518157610}
   maxHP: 5
   HPImage:
   - {fileID: 1932715245}
@@ -7400,17 +7612,8 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.062300026
-      value: 0.7047958
-      inSlope: 0.82540226
-      outSlope: 0.82540226
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.1166687
-      value: 0.95287323
+      time: 0.38333893
+      value: 0.77615356
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -7429,6 +7632,7 @@ MonoBehaviour:
     m_Bits: 64
   JumpButtonName: Jump
   attackTime: 1
+  gameOverUI: {fileID: 874684370}
   mutekiTime: 10
   speedUpTime: 15
   speedUpValue: 8
@@ -7443,11 +7647,6 @@ MonoBehaviour:
   - {fileID: 1329627588}
   - {fileID: 1160249978}
   - {fileID: 1368529767}
-  copyItem:
-  - {fileID: 909826304}
-  - {fileID: 1687571700}
-  - {fileID: 235605384}
-  - {fileID: 1909638075}
 --- !u!1001 &1444599523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7548,7 +7747,7 @@ GameObject:
   - component: {fileID: 1665633182}
   - component: {fileID: 1665633181}
   - component: {fileID: 1665633180}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemySheepAttackObj
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
@@ -7665,7 +7864,7 @@ GameObject:
   - component: {fileID: 1671924451}
   - component: {fileID: 1671924452}
   - component: {fileID: 1671924453}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: AttackSensor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7706,7 +7905,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 3
+  m_Radius: 2.5
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1671924453
 MonoBehaviour:
@@ -7736,7 +7935,7 @@ GameObject:
   - component: {fileID: 1687571705}
   m_Layer: 0
   m_Name: ItemDuck
-  m_TagString: Untagged
+  m_TagString: ChangeItem_Duck
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8747,7 +8946,7 @@ GameObject:
   - component: {fileID: 1909638080}
   m_Layer: 0
   m_Name: ItemSheep
-  m_TagString: Untagged
+  m_TagString: ChangeItem_Sheep
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8876,6 +9075,10 @@ PrefabInstance:
     - target: {fileID: 175374, guid: 8280ad2f586477b47ac0d3d3e444e3aa, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 175374, guid: 8280ad2f586477b47ac0d3d3e444e3aa, type: 3}
+      propertyPath: m_TagString
+      value: ChangeItem_Penguin
       objectReference: {fileID: 0}
     - target: {fileID: 475298, guid: 8280ad2f586477b47ac0d3d3e444e3aa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -9635,7 +9838,11 @@ MonoBehaviour:
   - {fileID: 440842071}
   - {fileID: 844557895}
   - {fileID: 198342, guid: fe9bab289d42f0244859df1b1359454b, type: 3}
-  items: []
+  items:
+  - {fileID: 4745491148931209344, guid: 8578dfdfc7120324d822bf21c1bfdde6, type: 3}
+  - {fileID: 1548529804153977282, guid: 04aa65ec3ad8efa4a8bdb0d12232ef73, type: 3}
+  - {fileID: 8312135338427641164, guid: a3ae6bd893ce0684983e0322223ef5c3, type: 3}
+  - {fileID: 8753407851421133778, guid: b381944236b9f9644be7c919b966a544, type: 3}
 --- !u!135 &1992822200
 SphereCollider:
   m_ObjectHideFlags: 0

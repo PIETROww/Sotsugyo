@@ -1,7 +1,6 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -76,6 +75,9 @@ public class Player : MonoBehaviour
     //private float damageCnt = 0.0f;
     //private bool isDamaged;
     //private MeshRenderer mesh;
+
+    //死亡--------------------------------
+    public GameObject gameOverUI;
 
     //無敵--------------------------------
     public float mutekiTime = 15.0f;
@@ -160,7 +162,6 @@ public class Player : MonoBehaviour
                 jumping = false;
                 jumpTime = 0;
             }
-            //else if (Input.GetButton(JumpButtonName))
             else
             {
                 jumpTime += Time.deltaTime;
@@ -240,6 +241,7 @@ public class Player : MonoBehaviour
                 if (jumping) { this.state = State.Jump; }
                 if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
                 //if (isDamaged) { state = State.Damage; }
+                if (HP <= 0) { this.state = State.Dead; }
                 if (changeFlag) { this.state = State.Stop; }
                 break;
             case State.Move:
@@ -247,6 +249,7 @@ public class Player : MonoBehaviour
                 if (jumping) { this.state = State.Jump; }
                 if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
                 //if (isDamaged) { state = State.Damage; }
+                if (HP <= 0) { this.state = State.Dead; }
                 if (changeFlag) { this.state = State.Stop; }
                 break;
             case State.Jump:
@@ -261,6 +264,7 @@ public class Player : MonoBehaviour
 
                 }
                 //if (isDamaged) { state = State.Damage; }
+                if (HP <= 0) { this.state = State.Dead; }
                 if (changeFlag) { this.state = State.Stop; }
                 break;
 
@@ -269,9 +273,14 @@ public class Player : MonoBehaviour
                 {
                     attackCnt = 0.0f;
                     attackFlag = true;
+                    if (chara != Chara.Penguin)
+                    {
+                        attackObj.SetActive(false);
+                    }
                     this.state = State.Idle;
                 }
                 //if (isDamaged) { state = State.Damage; }
+                if (HP <= 0) { this.state = State.Dead; }
                 if (changeFlag) { this.state = State.Stop; }
                 break;
             //case State.Damage:
@@ -291,6 +300,7 @@ public class Player : MonoBehaviour
                     this.state = State.Idle;
                     changeFlag = false;
                 }
+
                 break;
         }
     }
@@ -370,7 +380,8 @@ public class Player : MonoBehaviour
 
     void Dead()
     {
-        SceneManager.LoadScene("StageSelect");
+        gameOverUI.SetActive(true);
+        //Time.timeScale = 0f;            //時間を止める
     }
 
     private void Muteki()
@@ -462,18 +473,18 @@ public class Player : MonoBehaviour
         Destroy(getEffect, 1.0f);
     }
 
-    void Falling()
-    {
-        if (transform.position.y <= -10)
-        {
-            //カメラを先にチェックポイント付近に移動させる
+    //void Falling()
+    //{
+    //    if (transform.position.y <= -10)
+    //    {
+    //        //カメラを先にチェックポイント付近に移動させる
 
-            //チェックポイントにワープする
+    //        //チェックポイントにワープする
 
-            //今はとりあえずゲームオーバーに
-            //HP = 0;
-        }
-    }
+    //        //今はとりあえずゲームオーバーに
+    //        //HP = 0;
+    //    }
+    //}
 
     //変身
     //public void Copy(ref CharaUniqueAction uniqueAction, ref GameObject[] characters, ref Animator animator, ref GameObject attackObj,
@@ -565,7 +576,7 @@ public class Player : MonoBehaviour
     }
 
 
-    public GameObject[] copyItem;
+    //public GameObject[] copyItem;
     private void OnCollisionEnter(Collision other)
     {
         //ぶつかった対象が無敵アイテムの場合
@@ -615,33 +626,45 @@ public class Player : MonoBehaviour
         }
 
         //変身のフラグを設定＋変身する
-        if (other.gameObject == copyItem[0])
+        if (other.gameObject.tag == "ChangeItem_Cat")
         {
-            changeFlag = true;
-            changeEffect();
-            chara = Chara.Cat;
-            Copy();
+            if (chara != Chara.Cat)
+            {
+                //changeFlag = true;
+                //changeEffect();
+                chara = Chara.Cat;
+                Copy();
+            }
         }
-        if (other.gameObject == copyItem[1])
+        if (other.gameObject.tag == "ChangeItem_Duck")
         {
-            changeFlag = true;
-            changeEffect();
-            chara = Chara.Duck;
-            Copy();
+            if (chara != Chara.Duck)
+            {
+                //changeFlag = true;
+                //changeEffect();
+                chara = Chara.Duck;
+                Copy();
+            }
         }
-        if (other.gameObject == copyItem[2])
+        if (other.gameObject.tag == "ChangeItem_Penguin")
         {
-            changeFlag = true;
-            changeEffect();
-            chara = Chara.Penguin;
-            Copy();
+            if (chara != Chara.Penguin)
+            {
+                //changeFlag = true;
+                //changeEffect();
+                chara = Chara.Penguin;
+                Copy();
+            }
         }
-        if (other.gameObject == copyItem[3])
+        if (other.gameObject.tag == "ChangeItem_Sheep")
         {
-            changeFlag = true;
-            changeEffect();
-            chara = Chara.Sheep;
-            Copy();
+            if (chara != Chara.Sheep)
+            {
+                //changeFlag = true;
+                //changeEffect();
+                chara = Chara.Sheep;
+                Copy();
+            }
         }
     }
 
