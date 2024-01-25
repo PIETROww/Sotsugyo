@@ -20,7 +20,7 @@ public class KibakoController : MonoBehaviour
     {
         
     }
-    private void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
        //ParticleSystem newParticle = Instantiate(particle);
         //newParticle.transform.position = new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z);
