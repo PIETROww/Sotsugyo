@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5592520206162862036}
   - component: {fileID: 3321334152779060582}
   - component: {fileID: 6465231997755608482}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnemyIceBall
   m_TagString: EnemyAttack
   m_Icon: {fileID: 0}
