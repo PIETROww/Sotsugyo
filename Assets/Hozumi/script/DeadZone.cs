@@ -14,8 +14,19 @@ public class DeadZone : MonoBehaviour
         Vector3 targetPosition = targetTransform.position;
         StartPos = targetPosition;
     }
-
-   
+    private void Update()
+    {
+        ResetPos();
+    }
+    private void ResetPos()
+    {
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            Debug.Log("QÉLÅ[Ç™âüÇ≥ÇÍÇΩ");
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            playerObject.transform.position = StartPos;
+        }
+    }
     private void OnCollisionEnter(Collision other)
     {
         if (other.gameObject.CompareTag("Player"))

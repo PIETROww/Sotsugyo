@@ -31,6 +31,7 @@ public class NewBehaviourScript : MonoBehaviour
             if (transform.position.y <= bottomY)
             {
                 particle.Play();
+                Debug.Log("スイッチ作動");
                 audioSource.Play();
                 wall.isOpen2 = true;
                 enabled = false;
