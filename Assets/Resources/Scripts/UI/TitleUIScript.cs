@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 //Bボタンが押されたらアニメーションでタイトル・ボタン画面外へ
@@ -26,7 +27,7 @@ public class TitleUIScript : MonoBehaviour
 
     //Setting（設定）ボタンが押された際に出てくるボタンたち
     [SerializeField] private Button TutorialButton; //チュートリアル遷移ボタン
-    [SerializeField] private Button ReturnButton;　//戻るボタン
+    [SerializeField] private GameObject ReturnButton;　//戻るボタン
     [SerializeField] private GameObject MasterSlider;
 
 
@@ -36,12 +37,13 @@ public class TitleUIScript : MonoBehaviour
     [SerializeField] private GameObject SoundPanel;
     [SerializeField] private GameObject TutorialPanel;
 
-  
+    bool isTitle;
+
     void Start()
     {
         gameManager = GameManager.instance;
-        gameUI=GetComponent<GameUIScript>();
-        tutorialM=GetComponent<TutorialManager>();
+        gameUI = GetComponent<GameUIScript>();
+        tutorialM = GetComponent<TutorialManager>();
         animator = gameObject.GetComponent<Animator>();
         eventSystem = EventSystem.current;
 
@@ -50,16 +52,19 @@ public class TitleUIScript : MonoBehaviour
         CreditPanel.gameObject.SetActive(false);
         SoundPanel.gameObject.SetActive(false);
         TutorialPanel.gameObject.SetActive(false);
+        isTitle = true;
+     
     }
 
     void Update()
     {
+        Debug.Log(isTitle);
         //現在フォーカス（選択されている）ゲームオブジェクト取得
         //取得したゲームオブジェクトがボタンコンポーネントを所持しているか確認
         Button selectedButton = EventSystem.current.currentSelectedGameObject.GetComponent<Button>();
 
         //もしゲームパッドの東側のボタン（今回はBボタン）が押された際
-        if (Gamepad.current.buttonEast.wasPressedThisFrame)
+        if (Gamepad.current.buttonEast.wasPressedThisFrame && isTitle == true)
         {
             if (selectedButton != null)
             {
@@ -67,7 +72,16 @@ public class TitleUIScript : MonoBehaviour
             }
         }
 
-        if (TutorialPanel==true)
+         if (Gamepad.current.buttonEast.wasPressedThisFrame && ReturnButton.activeSelf == true)
+        {
+            selectedButton.onClick.Invoke();
+        }
+
+         if(Gamepad.current.startButton.wasPressedThisFrame)
+        {
+            gameUI.MenuButtonDown();
+        }
+        if (TutorialPanel == true)
         {
             if (Gamepad.current.buttonSouth.wasPressedThisFrame)
             {
@@ -90,7 +104,7 @@ public class TitleUIScript : MonoBehaviour
     public void StartButtonDown()
     {
         animator.SetTrigger("GameStart");
-
+        isTitle = false;
         gameUI.Invoke("MenuUI", 7.5f);
         //つきのくんがカメラワークいじる
     }

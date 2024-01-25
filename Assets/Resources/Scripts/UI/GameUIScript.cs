@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameUIScript : MonoBehaviour
@@ -16,7 +17,7 @@ public class GameUIScript : MonoBehaviour
     [SerializeField] private Button SousaButton;
     [SerializeField] private GameObject MenuPanel;
 
-    [SerializeField] private Button ReturnButton;
+    [SerializeField] private GameObject ReturnButton;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +53,7 @@ public class GameUIScript : MonoBehaviour
         //
         Menu.SetActive(true);
 
-        EventSystem.current.SetSelectedGameObject(MenuButton.gameObject);
+       // EventSystem.current.SetSelectedGameObject(MenuButton.gameObject);
     }
     public void MenuButtonDown()
     {
@@ -85,6 +86,6 @@ public class GameUIScript : MonoBehaviour
 
     public void StageSelectButtonDown()
     {
-        gm.LoadScene("StageSelect");
+        SceneManager.LoadScene("StageSelect");
     }
 }
