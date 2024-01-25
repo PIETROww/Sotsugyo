@@ -30,6 +30,7 @@ public class Switch2 : MonoBehaviour
             if (transform.position.y <= bottomY)
             {
                 particle.Play();
+                Debug.Log("スイッチ作動");
                 audioSource.Play();
                 wall.isOpen1 = true;
                 enabled = false;

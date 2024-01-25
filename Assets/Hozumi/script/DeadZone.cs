@@ -22,7 +22,7 @@ public class DeadZone : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Q))
         {
-            Debug.Log("‰Ÿ‚³‚ê‚½");
+            Debug.Log("QƒL[‚ª‰Ÿ‚³‚ê‚½");
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             playerObject.transform.position = StartPos;
         }
