@@ -79,7 +79,7 @@ public class Enemy : MonoBehaviour
         State_Move();
 
         //確認用
-        Debug.Log(attackSensor);
+        //Debug.Log(attackSensor);
     }
 
     void State_Think()
@@ -94,7 +94,7 @@ public class Enemy : MonoBehaviour
             case State.Capture:
                 if (!sensor) { state = State.Idle; }
                 if (isDamaged) { state = State.Damage; }
-                if (attackSensor) { state = State.Attack; }
+                if (attackSensor && chara != Chara.Zako) { state = State.Attack; }
                 if (HP <= 0) { state = State.Dead; }
                 break;
             case State.Attack:
@@ -330,6 +330,8 @@ public class Enemy : MonoBehaviour
             characters[2].SetActive(false);
             characters[3].SetActive(false);
             characters[4].SetActive(true);
+            animator = characters[4].GetComponent<Animator>();
+
             //animator = characters[4].GetComponent<Animator>();
         }
     }
@@ -339,7 +341,7 @@ public class Enemy : MonoBehaviour
         {
             //player.GetComponent<Player>().HP -= 1;    //プレイヤー側でやってる
 
-            state = State.Damage;
+            isDamaged = true;
         }
     }
     void OnTriggerEnter(Collider other)
