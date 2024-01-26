@@ -171,7 +171,7 @@ public class Player : MonoBehaviour
         //StateがMove状態の場合、砂煙エフェクトを再生する
         if (this.state == State.Move)
         {
-            sunakemuriEffect();
+            //sunakemuriEffect();
         }
 
         //確認
@@ -240,6 +240,7 @@ public class Player : MonoBehaviour
                 if (isGrounded && moveForward.magnitude > 0) { this.state = State.Move; }
                 if (jumping) { this.state = State.Jump; }
                 if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
+                if (gameInputs.Player.Attack.triggered) { this.state = State.Attack; }       //NキーとAボタンのどちらでも攻撃できる
                 //if (isDamaged) { state = State.Damage; }
                 if (HP <= 0) { this.state = State.Dead; }
                 if (changeFlag) { this.state = State.Stop; }
@@ -248,21 +249,15 @@ public class Player : MonoBehaviour
                 if (moveForward.magnitude <= 0) { this.state = State.Idle; }
                 if (jumping) { this.state = State.Jump; }
                 if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
+                if (gameInputs.Player.Attack.triggered) { this.state = State.Attack; }
                 //if (isDamaged) { state = State.Damage; }
                 if (HP <= 0) { this.state = State.Dead; }
                 if (changeFlag) { this.state = State.Stop; }
                 break;
             case State.Jump:
                 if (isGrounded) { this.state = State.Idle; }
-                if (Input.GetKeyDown(KeyCode.N))
-                {
-                    //if(action is PlayerUniqueActionPenguin actionPenguin)
-                    //{
-                    //    actionPenguin.oneShot = false;
-                    //}
-                    this.state = State.Attack;
-
-                }
+                if (Input.GetKeyDown(KeyCode.N)) { this.state = State.Attack; }
+                if (gameInputs.Player.Attack.triggered) { this.state = State.Attack; }
                 //if (isDamaged) { state = State.Damage; }
                 if (HP <= 0) { this.state = State.Dead; }
                 if (changeFlag) { this.state = State.Stop; }
@@ -273,7 +268,7 @@ public class Player : MonoBehaviour
                 {
                     attackCnt = 0.0f;
                     attackFlag = true;
-                    if (chara != Chara.Penguin)
+                    if (chara == Chara.Cat || chara == Chara.Sheep)
                     {
                         attackObj.SetActive(false);
                     }
@@ -417,61 +412,61 @@ public class Player : MonoBehaviour
         }
     }
 
-    //スピードアップ
-    IEnumerator SpeedUp()
-    {
-        defaultSpeed = speed;
-        speed = speedUpValue;
-        yield return new WaitForSeconds(speedUpTime);
-        speed = defaultSpeed;
-    }
+    ////スピードアップ
+    //IEnumerator SpeedUp()
+    //{
+    //    defaultSpeed = speed;
+    //    speed = speedUpValue;
+    //    yield return new WaitForSeconds(speedUpTime);
+    //    speed = defaultSpeed;
+    //}
 
-    //砂煙エフェクト
-    private void sunakemuriEffect()
-    {
-        effectCnt += Time.deltaTime;
+    ////砂煙エフェクト
+    //private void sunakemuriEffect()
+    //{
+    //    effectCnt += Time.deltaTime;
 
-        if (effectCnt >= 0.3)
-        {
-            GameObject sunakemuriEffect = Instantiate(sunakemuriEffectPrefab, new Vector3(transform.position.x, transform.position.y - 0.7f, transform.position.z), Quaternion.identity);
-            Destroy(sunakemuriEffect, 1.0f);
-            effectCnt = 0.0f;
-        }
-        if (this.state != State.Move)
-        {
-            effectCnt = 0.0f;
-        }
-    }
+    //    if (effectCnt >= 0.3)
+    //    {
+    //        GameObject sunakemuriEffect = Instantiate(sunakemuriEffectPrefab, new Vector3(transform.position.x, transform.position.y - 0.7f, transform.position.z), Quaternion.identity);
+    //        Destroy(sunakemuriEffect, 1.0f);
+    //        effectCnt = 0.0f;
+    //    }
+    //    if (this.state != State.Move)
+    //    {
+    //        effectCnt = 0.0f;
+    //    }
+    //}
 
-    //無敵エフェクト
-    private void mutekiEffect()
-    {
-        GameObject mutekiEffect = Instantiate(mutekiEffectPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        mutekiEffect.transform.parent = this.gameObject.transform;
-        Destroy(mutekiEffect, mutekiTime);
-    }
+    ////無敵エフェクト
+    //private void mutekiEffect()
+    //{
+    //    GameObject mutekiEffect = Instantiate(mutekiEffectPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+    //    mutekiEffect.transform.parent = this.gameObject.transform;
+    //    Destroy(mutekiEffect, mutekiTime);
+    //}
 
-    //スピードアップエフェクト
-    private void speedUpEffect()
-    {
-        GameObject speedupEffect = Instantiate(speedUpEffectPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        speedupEffect.transform.parent = this.gameObject.transform;
-        Destroy(speedupEffect, speedUpTime);
-    }
+    ////スピードアップエフェクト
+    //private void speedUpEffect()
+    //{
+    //    GameObject speedupEffect = Instantiate(speedUpEffectPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+    //    speedupEffect.transform.parent = this.gameObject.transform;
+    //    Destroy(speedupEffect, speedUpTime);
+    //}
 
-    //変身エフェクト
-    public void changeEffect()
-    {
-        GameObject changeEffect = Instantiate(changeEffectPrefab, this.transform.position, Quaternion.identity);
-        Destroy(changeEffect, 1.0f);
-    }
+    ////変身エフェクト
+    //public void changeEffect()
+    //{
+    //    GameObject changeEffect = Instantiate(changeEffectPrefab, this.transform.position, Quaternion.identity);
+    //    Destroy(changeEffect, 1.0f);
+    //}
 
-    //アイテム取得エフェクト
-    private void itemGetEffect()
-    {
-        GameObject getEffect = Instantiate(getEffectPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
-        Destroy(getEffect, 1.0f);
-    }
+    ////アイテム取得エフェクト
+    //private void itemGetEffect()
+    //{
+    //    GameObject getEffect = Instantiate(getEffectPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+    //    Destroy(getEffect, 1.0f);
+    //}
 
     //void Falling()
     //{
@@ -583,22 +578,22 @@ public class Player : MonoBehaviour
         if (other.gameObject.tag == "MutekiItem")
         {
             mutekiFlag = true;
-            mutekiEffect();
-            itemGetEffect();
+            //mutekiEffect();
+            //itemGetEffect();
         }
 
         //ぶつかった対象がスピードアップアイテムの場合
         if (other.gameObject.tag == "SpeedupItem")
         {
             StartCoroutine("SpeedUp");
-            speedUpEffect();
-            itemGetEffect();
+            //speedUpEffect();
+            //itemGetEffect();
         }
 
         //ぶつかった対象が回復アイテムの場合
         if (other.gameObject.tag == "HealItem")
         {
-            itemGetEffect();
+            //itemGetEffect();
 
             HP += 1;
             //HPがmaxHP以上回復しないようにする
@@ -652,6 +647,7 @@ public class Player : MonoBehaviour
             {
                 //changeFlag = true;
                 //changeEffect();
+                attackObj.SetActive(false);     //ネコ、ヒツジの攻撃をオフにする
                 chara = Chara.Penguin;
                 Copy();
             }
