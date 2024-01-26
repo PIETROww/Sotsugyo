@@ -40,7 +40,7 @@ public class ChangeItemController : MonoBehaviour
                 //newParticle.transform.position = this.transform.position;
                 //newParticle.Play();
 
-                GameObject itemgetEffect = Instantiate(effectPrefab, transform.position, Quaternion.identity);
+                GameObject itemgetEffect = Instantiate(effectPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Quaternion.identity);
                 Destroy(itemgetEffect, 3.0f);
                 Destroy(this.gameObject);
             }

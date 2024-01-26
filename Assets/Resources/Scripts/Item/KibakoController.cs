@@ -30,6 +30,7 @@ public class KibakoController : MonoBehaviour
             GameObject destroyEffect = Instantiate(effectPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), Quaternion.identity);
             Destroy(destroyEffect, 3.0f);
             Destroy(this.gameObject);
+            Destroy(other.gameObject);
             Instantiate(itemPrefab, new Vector3(transform.position.x, transform.position.y + 1.0f, transform.position.z), itemPrefab.transform.rotation);
         }
     }
