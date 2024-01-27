@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -9261,11 +9261,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8aa396952c169d4c898e4d8204c6b60, type: 3}
---- !u!4 &1250962965 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-  m_PrefabInstance: {fileID: 1380679109}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1255552699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2314742059631966826, guid: cb26f6315415ca542b64af641dc9cc88, type: 3}
@@ -9734,67 +9729,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 166016, guid: f657c58adb4c219419ae056411d88e27, type: 3}
   m_PrefabInstance: {fileID: 1016056490}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1380679109
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 2142597620}
-    m_Modifications:
-    - target: {fileID: 1605800071586374175, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_Name
-      value: Effect_Damage
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_RootOrder
-      value: 17
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5581947121364491075, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
 --- !u!4 &1400270818 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8834097267840796070, guid: caec6db9ebd151943b8a953ebdf76887, type: 3}
@@ -12904,7 +12838,6 @@ Transform:
   - {fileID: 1341027306}
   - {fileID: 1016056491}
   - {fileID: 787712839}
-  - {fileID: 1250962965}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -12981,6 +12914,7 @@ MonoBehaviour:
   speedUpEffectPrefab: {fileID: 4769798593898022933, guid: 7cf0c0596f30b6a4cac0ffc2f46f65f3, type: 3}
   getEffectPrefab: {fileID: 8068767587820305409, guid: 755c1cf6271a5a04b99303a17d2b5e78, type: 3}
   changeEffectPrefab: {fileID: 8508506533935444110, guid: 1610503f68d065146b119af11e974876, type: 3}
+  damageEffectPrefab: {fileID: 1605800071586374175, guid: a808b0c15bc7f9e42a372e408dff2afe, type: 3}
   chara: 0
   charactersLooks:
   - {fileID: 839213903}

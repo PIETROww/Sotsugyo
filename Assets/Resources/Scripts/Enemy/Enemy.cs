@@ -39,6 +39,12 @@ public class Enemy : MonoBehaviour
     bool attackFlag = true;
     CharaUniqueAction uniqueAction;
 
+    //エフェクト--------------------------
+    //アタックヒットエフェクト
+    public GameObject attackHitEffectPrefab;
+    //死亡エフェクト
+    public GameObject deadEffectPrefab;
+
     //キャラ分け--------------------------------
     public enum Chara
     {
@@ -198,6 +204,8 @@ public class Enemy : MonoBehaviour
 
         //HPが1減る
         HP -= 1;
+
+        //attackHitEffect();
     }
     void Dead()
     {
@@ -218,9 +226,24 @@ public class Enemy : MonoBehaviour
                 break;
         }
 
+        //DeadEffect();
         Destroy(gameObject);
 
     }
+
+    ////アタックヒットエフェクト
+    //private void attackHitEffect()
+    //{
+    //    GameObject attackHitEffect = Instantiate(attackHitEffectPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+    //    Destroy(attackHitEffect, 1.0f);
+    //}
+
+    ////死亡エフェクト
+    //private void DeadEffect()
+    //{
+    //    GameObject deadEffect = Instantiate(deadEffectPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+    //    Destroy(deadEffect, 1.0f);
+    //}
 
     void CharaSelect()
     {
