@@ -103,6 +103,8 @@ public class Player : MonoBehaviour
     public GameObject changeEffectPrefab;
     private float stopCnt = 0.0f;
     private bool changeFlag = false;
+    //ダメージエフェクト
+    public GameObject damageEffectPrefab;
 
     //変身--------------------------------
     public enum Chara
@@ -371,6 +373,7 @@ public class Player : MonoBehaviour
     {
         HPImage[HP - 1].SetActive(false);
         HP -= 1;
+        //damageEffect();
     }
 
     void Dead()
@@ -466,6 +469,13 @@ public class Player : MonoBehaviour
     //{
     //    GameObject getEffect = Instantiate(getEffectPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     //    Destroy(getEffect, 1.0f);
+    //}
+
+    ////ダメージエフェクト
+    //private void damageEffect()
+    //{
+    //    GameObject damageEffect = Instantiate(damageEffectPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
+    //    Destroy(damageEffect, 1.0f);
     //}
 
     //void Falling()
